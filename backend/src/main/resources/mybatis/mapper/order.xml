@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.backend.dao.OrdersDao">
+	
+	<select id="selectMonthPrice" resultType="monthlydata">
+		select b.order_date as month,nvl(a.order_total_price,0) as month_total_price
+		from
+		    (select TO_CHAR(order_date,'yyyymm') as order_date ,sum(order_total_price) as order_total_price
+		    from orders 
+		    where order_date &gt;= to_date(concat(to_char(add_months(SYSDATE,-12),'yyyymm'),'01')) and order_date &lt;= sysdate and (order_state=1 or order_state=5)
+		    group by TO_CHAR(order_date,'yyyymm')
+		    order by order_date) a
+		        full join
+		    (select level as order_date
+		    from dual
+		     where level &gt; TO_NUMBER(TO_CHAR(add_months(SYSDATE,-13),'YYYYmm')) and substr(level,5,2) &gt; '00' and substr(level,5,2) &lt;'13'
+		     connect by level &lt;= to_number(to_char(sysdate, 'YYYYmm'))) b
+		 ON a.order_date=b.order_date
+		 order by b.order_date
+	</select>
+	
+	
+	<select id="selectMonthCount" resultType="monthlydata">
+		select b.order_date as month ,nvl(a.order_count,0) as month_count
+		from
+		    (select TO_CHAR(order_date,'yyyymm') as order_date ,count(*) as order_count
+	        from orders 
+	        where order_date &gt;= to_date(concat(to_char(add_months(SYSDATE,-12),'yyyymm'),'01')) and order_date &lt;= sysdate and (order_state=1 or order_state=5)
+	        group by TO_CHAR(order_date,'yyyymm')
+	        order by order_date) a
+		            full join
+		    (select level as order_date
+	        from dual
+	        where level &gt; TO_NUMBER(TO_CHAR(add_months(SYSDATE,-13),'YYYYmm')) and substr(level,5,2) &gt; '00' and substr(level,5,2) &lt;'13'
+	        connect by level &lt;= to_number(to_char(sysdate, 'YYYYmm'))) b
+		 ON a.order_date=b.order_date
+		 order by b.order_date
+	</select>
+	
+	<select id="selectCountryCount" resultType="ordercount">
+		select product_country, nvl(sum(order_product_count),0) as order_count
+	    from(
+	        select *
+	        from
+	            (select products_product_id, order_product_count
+	            from order_products,orders
+	            where orders_order_id=order_id and (order_state=1 or order_state=5)) a
+	                full join
+	            (select product_id,product_country
+	            from products) b
+	        ON a.products_product_id=b.product_id
+	        )
+	    group by product_country
+	</select>
+
+	<select id="selectTasteCount" resultType="ordercount">
+		select product_taste, nvl(sum(order_product_count),0) as order_count
+	    from(
+	        select *
+	        from
+	            (select products_product_id, order_product_count
+	            from order_products,orders
+	            where orders_order_id=order_id and (order_state=1 or order_state=5)) a
+	                full join
+	            (select product_id,product_taste
+	            from products) b
+	        ON a.products_product_id=b.product_id
+	        )
+	    group by product_taste
+	</select>
+	
+</mapper>

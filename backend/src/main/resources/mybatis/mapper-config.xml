@@ -3,5 +3,9 @@
 <configuration>
    <typeAliases>
       <typeAlias alias="pager" type="com.mycompany.backend.dto.Pager" />
+      <typeAlias alias="order" type="com.mycompany.backend.dto.Order" />
+      <typeAlias alias="monthlydata" type="com.mycompany.backend.dto.MonthlyData" />
+      <typeAlias alias="ordercount" type="com.mycompany.backend.dto.OrderCount" />
+      
    </typeAliases>
 </configuration>
