@@ -3,5 +3,7 @@
 <configuration>
    <typeAliases>
       <typeAlias alias="pager" type="com.mycompany.backend.dto.Pager" />
+      <typeAlias alias="order" type="com.mycompany.backend.dto.Order"/>
+      <typeAlias alias="orderProduct" type="com.mycompany.backend.dto.OrderProduct"/>
    </typeAliases>
-</configuration>
+</configuration> 

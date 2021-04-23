@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <script src="https://kit.fontawesome.com/f9927be6a9.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -14,6 +17,10 @@
   <base href="/"/>
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
+
+  <script src="controllers/orderController.js"></script>
+
+  <script src="services/orderService.js"></script>
 </head>
 <body>
   <div class="d-flex flex-column vh-100">
@@ -33,7 +40,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-8 p-3">
+        <div class="col-md-6 col-lg-10 p-3">
             <div class=" h-100 d-flex flex-column">
             <div class="flex-grow-1 overflow-auto pr-3" style="height:0px">
                 <ng-view/>

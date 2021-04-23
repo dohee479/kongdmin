@@ -11,5 +11,6 @@ angular.module("app")
     $routeProvider
     .when("/", {templateUrl: "views/home/home.html"})
     .when("/user/login", {templateUrl: "views/user/login.html"})
+    .when("/order", {templateUrl: "views/order/index.html", controller: "orderController"})
     .otherwise({redirectTo: "/"});
   });

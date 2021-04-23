@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.OrderDao">
+
+   <select id="selectByPage" resultType="order">
+      select rnum
+      		,order_id
+      		,order_receiver
+      		,order_tel
+      		,order_address
+      		,order_detail_address
+      		,order_msg
+      		,users_user_id
+      		,order_state
+      		,order_date
+      		,order_zipcode
+      		,order_account_name
+      		,order_account
+      		,order_total_price
+      
+      from (
+          select rownum as rnum
+	          	,order_id
+	      		,order_receiver
+	      		,order_tel
+	      		,order_address
+	      		,order_detail_address
+	      		,order_msg
+	      		,users_user_id
+	      		,order_state
+	      		,order_date
+	      		,order_zipcode
+	      		,order_account_name
+	      		,order_account
+	      		,order_total_price
+     from (
+             select order_id
+		      		,order_receiver
+		      		,order_tel
+		      		,order_address
+		      		,order_detail_address
+		      		,order_msg
+		      		,users_user_id
+		      		,order_state
+		      		,order_date
+		      		,order_zipcode
+		      		,order_account_name
+		      		,order_account
+		      		,order_total_price
+             from orders
+             <if test="state == 7">
+             	<if test="search_user_id == null">where order_state != 0 </if>
+             	<if test="search_user_id != null">where order_state != 0 and users_user_id = #{search_user_id}</if>
+             </if>
+             <if test="state != 7">
+             	<if test="search_user_id == null">where order_state != 0 and order_state = #{state}</if>
+             	<if test="search_user_id != null">where order_state != 0 and order_state = #{state} and users_user_id = #{search_user_id}</if>
+             </if>
+             order by order_id desc
+          )
+          where rownum &lt;= #{pager.endRowNo}
+      ) 
+      where rnum &gt;= #{pager.startRowNo}
+   </select>
+   
+   <select id="count" resultType="int">
+      select count(*) 
+      from orders 
+      <if test="state == 7">
+      	<if test="search_user_id == null">where order_state != 0 </if>
+        <if test="search_user_id != null">where order_state != 0 and users_user_id = #{search_user_id}</if>
+      </if>
+      <if test="state != 7">
+        <if test="search_user_id == null">where order_state != 0 and order_state = #{state}</if>
+        <if test="search_user_id != null">where order_state != 0 and order_state = #{state} and users_user_id = #{search_user_id}</if>
+      </if>
+   </select>
+   
+   <select id="selectStateCountByState" resultType="int">
+   		select count(*)
+   		from orders
+   		where order_state = #{state}
+   </select>
+
+   <select id="selectByOrderId" parameterType="int" resultType="order">
+   	select order_id
+    		,order_receiver
+    		,order_tel
+    		,order_address
+    		,order_detail_address
+    		,order_msg
+    		,users_user_id
+    		,order_state
+    		,order_date
+    		,order_zipcode
+    		,order_account_name
+    		,order_account
+    		,order_total_price
+    from orders
+    where order_id = #{order_id}
+   </select>
+   
+   <select id="selectMainProductByOrderId" parameterType="int" resultType="String">
+	   	select product_title
+		from (select products_product_id
+			  from orders, order_products
+		      where #{order_id} = order_products.orders_order_id ) tmp, products
+		where tmp.products_product_id = products.product_id and rownum=1
+   </select>
+	
+
+
+</mapper>
