@@ -2,5 +2,14 @@
 // [] 안에는 의존 모듈
 angular.module("app", ["ngRoute"])
   .config(function() {
-    console.log("들어옴")
+  
+ 
   })
+  .controller("mainController",function($scope,$location,$route) {
+    $scope.reloadable = (path) => {
+      if($location.url().includes(path)){
+          $route.reload();
+          
+      }
+  }
+  });

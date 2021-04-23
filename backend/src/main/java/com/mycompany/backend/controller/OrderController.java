@@ -18,7 +18,7 @@ import com.mycompany.backend.dao.OrderProductDao;
 import com.mycompany.backend.dto.Order;
 import com.mycompany.backend.dto.OrderProduct;
 import com.mycompany.backend.service.OrderProductService;
-import com.mycompany.backend.service.OrderService;
+import com.mycompany.backend.service.OrdersService;
 import com.mycompany.backend.dto.Pager;
 
 @RestController
@@ -27,7 +27,7 @@ public class OrderController {
 	private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
-	private OrderService orderService;
+	private OrdersService ordersService;
 	
 	@Autowired
 	private OrderProductService orderProductService;
@@ -36,16 +36,16 @@ public class OrderController {
 	public Map<String, Object> list(int pageNo, int state, String search_user_id) {
 		logger.info(state+"");
 		logger.info(search_user_id+"");
-		int totalRows = orderService.getCount(state, search_user_id);
+		int totalRows = ordersService.getCount(state, search_user_id);
 		Pager pager =  new Pager(5, 5, totalRows, pageNo);
-		List<Order> list = orderService.getList(pager, state, search_user_id);
+		List<Order> list = ordersService.getList(pager, state, search_user_id);
 		Map<String, Object> map = new HashMap<>();
 		
 		List<Integer> stateCountList = new ArrayList<>();
 		int stateNumber[] = {1,5,9};
 		
 		for( int i : stateNumber ) 
-			stateCountList.add(orderService.getStateCount(i));
+			stateCountList.add(ordersService.getStateCount(i));
 		
 		map.put("pager", pager);
 		map.put("order", list);
@@ -60,7 +60,7 @@ public class OrderController {
 	
    @GetMapping("/{order_id}")
     public Map<String, Object> read(@PathVariable int order_id) {
-    	Order order = orderService.getOrder(order_id);
+    	Order order = ordersService.getOrder(order_id);
     	List<OrderProduct> list = orderProductService.getListByOrderId(order_id);
     	Map<String, Object> map = new HashMap<>();
     	map.put("order", order);
@@ -70,7 +70,7 @@ public class OrderController {
    
    @GetMapping("/mainProduct/{order_id}")
    public Map<String, Object> getMainProduct(@PathVariable int order_id) {
-	   String mainProduct = orderService.getMainProduct(order_id);
+	   String mainProduct = ordersService.getMainProduct(order_id);
 	   logger.info(mainProduct);
 	   Map<String, Object> map = new HashMap<>();
 	   map.put("mainProduct",mainProduct);

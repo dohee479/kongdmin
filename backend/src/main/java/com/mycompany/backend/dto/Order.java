@@ -99,6 +99,7 @@ public class Order {
 	public void setOrder_zipcode(int order_zipcode) {
 		this.order_zipcode = order_zipcode;
 	}
+
 	public String getOrder_main_product() {
 		return order_main_product;
 	}
@@ -111,4 +112,5 @@ public class Order {
 	public void setOrder_product_count(int order_product_count) {
 		this.order_product_count = order_product_count;
 	}	
+
 }

@@ -7,13 +7,16 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/reset.css">
   <script src="https://kit.fontawesome.com/f9927be6a9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="resources/css/reset.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
   <base href="/"/>
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
@@ -21,8 +24,12 @@
   <script src="controllers/orderController.js"></script>
 
   <script src="services/orderService.js"></script>
+  <script src="services/homeService.js"></script>
+  <script src="controllers/homeController.js"></script>
+
+  
 </head>
-<body>
+<body ng-controller="mainController">
   <div class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-sm navbar-dark text-white font-weight-bold justify-content-between" style="background-color:#212529">
         <a class="navbar-brand" href="./">
@@ -52,7 +59,4 @@
   </div>
 </body> 
 </html>
-<!-- 123 -->
-<!-- 운호 테스트-->
-<!-- 동호 테스트 -->
-<!-- 종현 테스트 -->
+
