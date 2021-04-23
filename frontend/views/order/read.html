@@ -1,0 +1,146 @@
+<div class="align-items-center">
+주문상품목록
+<div>
+  <table class="table table-striped table-bordered">
+      <tr>
+          <th>상품번호</th>
+          <th>상품이름</th>
+          <th>용량선택</th>
+          <th>분쇄선택</th>
+          <th>갯수</th>
+          <th>상품금액</th>
+      </tr>
+      <tr ng-repeat="orderProduct in orderProducts">
+          <td>{{orderProduct.products_product_id}}</td>
+          <td>{{orderProduct.product_title}}</td>
+          <td>{{orderProduct.order_product_volume}}g</td>
+          <td ng-switch="{{orderProduct.order_product_grind}}"> 
+            <div ng-switch-when="1">홀빈</div>
+            <div ng-switch-when="2">프렌치프레스</div> 
+            <div ng-switch-when="3">핸드드립</div> 
+            <div ng-switch-when="4">더치용</div> 
+          </td>
+          <td>{{orderProduct.order_product_count}}</td>
+          <td>{{orderProduct.order_product_price}}</td>
+     
+      </tr>
+  </table>
+</div>
+
+
+<div>
+  주문상세
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">주문번호</th>
+        <td>{{order.order_id}}</td>
+      </tr>
+      <tr>
+        <th scope="row">주문자</th>
+        <td>{{order.users_user_id}}</td>
+      </tr>
+      <tr>
+        <th scope="row">입금정보</th>
+        <td>{{order.order_account_name}} [{{order.order_account}}]</td>
+      </tr>
+      <tr>
+        <th scope="row">주문날짜</th>
+        <td>{{order.order_date | date:"yyyy.MM.dd" }}</td>
+      </tr>
+      <tr>
+        <th scope="row">주문가격</th>
+        <td>{{order.order_total_price}}</td>
+      </tr>
+      <tr>
+        <th scope="row">주문상태</th>
+        <td>
+          <div ng-switch="{{order.order_state}}"> 
+            <div ng-switch-when="1">주문완료</div>
+            <div ng-switch-when="9">주문취소</div> 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+배송정보
+  <table class="table">
+    <tbody>
+  <tr>
+    <th scope="row">받는사람 이름</th>
+    <td>{{order.order_receiver}}</td>
+  </tr>
+  <tr>
+    <th scope="row">배송 연락처</th>
+    <td>{{order.order_tel}}</td>
+  </tr>
+  <tr>
+    <th scope="row">배송지 주소</th>
+    <td>[{{order.order_zipcode}}] {{order.order_address}} {{order.order_detail_address}} </td>
+  </tr>
+  <tr>
+    <th scope="row">배송지 메세지</th>
+    <td>{{order.order_msg}}</td>
+  </tr>
+</tbody>
+</table>
+  
+  <!-- <div class="form-group">
+      <label>주문번호:</label>
+      <input class="form-control" ng-value="order.order_id" readonly/>
+  </div>
+  <div class="form-group">
+    <label>주문자 이름:</label>
+    <input class="form-control" ng-value="order.order_receiver" readonly/>
+  </div>
+  <div class="form-group">
+    <label>전화번호:</label>
+    <input class="form-control" ng-value="order.order_tel" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>배송지주소:</label>
+    <input class="form-control" ng-value="order.order_address" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>배송지상세주소:</label>
+    <input class="form-control" ng-value="order.order_detail_address" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>배송메세지:</label>
+    <input class="form-control" ng-value="order.order_msg" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>주문자:</label>
+    <input class="form-control" ng-value="order.user_id" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>주문 상태:</label>
+    <div ng-switch="{{order.order_state}}"> 
+      <div ng-switch-when="1">주문완료</div>
+      <div ng-switch-when="9">주문취소</div> 
+    </div>
+  </div> 
+  <div class="form-group">
+    <label>주문날짜:</label>
+    <input class="form-control" ng-value="order.order_date" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>배송지 우편주소:</label>
+    <input class="form-control" ng-value="order.order_zipcode" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>무통장 입금주소:</label>
+    <input class="form-control" ng-value="order.order_account_name" readonly/>
+  </div> 
+  <div class="form-group">
+    <label>입금자 이름:</label>
+    <input class="form-control" ng-value="order.order_account" readonly/>
+  </div>
+  <div class="form-group">
+    <label>총 주문가격:</label>
+    <input class="form-control" ng-value="order.order_total_price" readonly/>
+  </div>
+  <button class="btn btn-primary btn-sm" ng-click="getList(pager.pageNo)">목록</button>
+</div> -->
+</div>

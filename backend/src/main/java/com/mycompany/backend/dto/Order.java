@@ -18,8 +18,9 @@ public class Order {
 	private String order_account;
 	private int order_total_price;
 	
-	/*주문시작 : 1 배송중 : 2 배송완료 : 3 구매확정 : 4 취소/환불 :5*/
-	
+	private String order_main_product;
+	private int order_product_count;
+
 	public int getOrder_id() {
 		return order_id;
 	}
@@ -99,7 +100,17 @@ public class Order {
 		this.order_zipcode = order_zipcode;
 	}
 
-	
-	
-	
+	public String getOrder_main_product() {
+		return order_main_product;
+	}
+	public void setOrder_main_product(String order_main_product) {
+		this.order_main_product = order_main_product;
+	}
+	public int getOrder_product_count() {
+		return order_product_count;
+	}
+	public void setOrder_product_count(int order_product_count) {
+		this.order_product_count = order_product_count;
+	}	
+
 }

@@ -1,2 +1,153 @@
-<div>
+<style>
+
+.state7, .state1, .state5, .state9{
+  background-color: #EFEFEF;
+}
+
+</style>
+
+<div class="d-flex flex-column align-items-center" >
+<div class="d-flex mb-5 mt-5">
+  <a ng-click="getList(1,7)">
+  <div class="card text-center mr-3" ng-class="{state7: sel.s7}" style="width: 10rem; height: 10rem;" >
+      <div class="card-body ">
+        <h2 class="card-title font-weight-bold">전체주문</h2>
+            <i class="fas fa-list" style="font-size:50px; color:#A9A9A9;"></i>
+          <p class="card-text mt-3"> {{stateCount[0] + stateCount[1] + stateCount[2]}}건</p>
+      </div>
+    </div>
+  </a>
+  
+  <a ng-click="getList(1, 1)">
+    <div class="card text-center mr-3" ng-class="{state1: sel.s1}" style="width: 10rem; height: 10rem;">
+      <div class="card-body ">
+        <h2 class="card-title font-weight-bold">주문완료</h2>
+        <i class="far fa-check-circle" style="font-size:50px; color:#A9A9A9;"></i>
+        <p class="card-text mt-3">{{stateCount[0]}}건</p>
+      </div>
+    </div>
+  </a>
+  
+    <div class="card text-center mr-3" style="width: 10rem; height: 10rem;">
+      <div class="card-body">
+        <h2 class="card-title font-weight-bold">결제완료</h2>
+        <i class="fas fa-money-check" style="font-size:50px; color:#A9A9A9;"></i>
+        <p class="card-text mt-3">건</p>
+      </div>
+    </div>
+  
+    <div class="card text-center mr-3" style="width: 10rem; height: 10rem;">
+      <div class="card-body">
+        <h2 class="card-title font-weight-bold">배송</h2>
+        <i class="fas fa-truck" style="font-size:50px; color:#A9A9A9;"></i>
+        <p class="card-text mt-3">건</p>
+      </div>
+    </div>
+  
+    <a ng-click="getList(1, 5)">
+    <div class="card text-center mr-3" ng-class="{state5: sel.s5}" style="width: 10rem; height: 10rem;">
+      <div class="card-body ">
+        <h2 class="card-title font-weight-bold">구매확정</h2>
+        <i class="fas fa-check-circle" style="font-size:50px; color:#3Cb371;"></i>
+        <p class="card-text mt-3">{{stateCount[1]}}건</p>
+      </div>
+    </div>
+  </a>
+  
+  <a ng-click="getList(1, 9)">
+    <div class="card text-center mr-3" ng-class="{state9: sel.s9}" style="width: 10rem; height: 10rem;">
+      <div class="card-body ">
+        <h2 class="card-title font-weight-bold">주문취소</h2>
+       <i class="fas fa-times" style="font-size:50px; color:#CD0000;"></i>
+        <p class="card-text mt-3">{{stateCount[2]}}건</p>
+      </div>
+    </div>
+  </div>
+</a>
+
+<table class="table mb-5" style="width: 1050px;">
+  <tr class="" style="height: 4em; vertical-align: middle;">
+      <td class="font-weight-bold" style="vertical-align: middle;">사용자 ID로 검색</td>
+      <td style="vertical-align: middle;">
+        <input type="text" class="form-control mr-sm-2" ng-change="getList(1,state)" ng-model="search.user_id" style="width:800px;" placeholder="ID를 입력하세요.">
+      </td>
+      <td>
+        
+       
+      </td>
+  </tr>
+
+  <tr class="" style="height: 4em; vertical-align: middle;">
+    <td class="font-weight-bold" style="vertical-align: middle;">가격순 조회</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr class="" style="height: 4em; vertical-align: middle;">
+    <td class="font-weight-bold" style="vertical-align: middle;">기간별 조회</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+</table>
+
+  <div>
+    <!-- 조회기간 -->
+  </div>
+
+
+  <div>
+    <div class="h5 mb-4 font-weight-bold" ng-switch="state">
+      <div ng-switch-when="1">주문완료 리스트</div>
+      <div ng-switch-when="5">구매확정 리스트</div>
+      <div ng-switch-when="9">주문취소 리스트</div>
+      <div ng-switch-when="7">전체주문 리스트</div> 
+    </div>   
+       
+    <table class="table text-center table-hover" style="width: 1050px;">
+        <tr class="bg-dark text-white">
+            <th style="width: 100px;">주문번호</th>
+            <th style="width: 150px;">주문자</th>
+            <th style="width: 300px;">주문상품</th>
+            <th style="width: 150px;">주문가격</th>
+            <th style="width: 150px;">주문날짜</th>
+            <th style="width: 150px;">주문상태</th>
+        </tr>
+        <tr class="" style="height: 4em; vertical-align: middle;" ng-repeat="order in orders" ng-click="read(order.order_id)">
+            <td class="font-weight-bold" style="vertical-align: middle;">{{order.order_id}}</td>
+            <td style="vertical-align: middle;">{{order.users_user_id}}</a></td>
+            <td style="vertical-align: middle;">{{}}</td>
+            <td style="vertical-align: middle;">{{order.order_total_price}}</td>
+            <td style="vertical-align: middle;">{{order.order_date | date:"yyyy.MM.dd" }}</td>
+            <td style="vertical-align: middle;" ng-switch="{{order.order_state}}"> 
+              <div ng-switch-when="1">주문완료</div>
+              <div ng-switch-when="5">구매확정</div>
+              <div ng-switch-when="9">주문취소</div> 
+            </td>
+        </tr>
+    </table>
+  </div>
+
+
+  <div ng-show="pager.totalRows!=0">
+    <button class="btn btn-outline-primary btn-sm" 
+                ng-click="getList(1,state)">처음</button> 
+    <button   class="btn btn-outline-info btn-sm" 
+                ng-show="pager.groupNo>1" 
+                ng-click="getList(pager.startPageNo-1,state)">이전</button>
+    <button ng-repeat="i in pageRange"
+               class="btn btn-sm {{(pager.pageNo==i)?'btn-danger':'btn-outline-success'}} {{!$last?'mr-1':''}}" 
+                ng-click="getList(i,state)">{{i}}</button>
+    <button   class="btn btn-outline-info btn-sm" 
+                ng-show="pager.groupNo < pager.totalGroupNo" 
+                ng-click="getList(pager.endPageNo+1,state)">다음</button>
+    <button class="btn btn-outline-primary btn-sm" 
+                ng-click="getList(pager.totalPageNo,state)">맨끝</button>
+  </div>
+  <div ng-show="pager.totalRows==0">
+    목록이 없습니다.
+  </div>
+
+
 </div>
+    

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.backend.dao.OrdersDao;
 import com.mycompany.backend.dto.MonthlyData;
+import com.mycompany.backend.dto.Order;
 import com.mycompany.backend.dto.OrderCount;
+import com.mycompany.backend.dto.Pager;
 
 
 @Service
@@ -28,5 +30,23 @@ public class OrdersService {
 	public List<OrderCount> getTasteCountList(){
 		return ordersDao.selectTasteCount();
 	}
-
+	public int getCount(int state, String search_user_id) {
+		return ordersDao.count(state, search_user_id);
+	}
+	
+	public List<Order> getList(Pager pager, int state, String search_user_id) {
+	    return ordersDao.selectByPage(pager, state, search_user_id);
+	}
+	
+	public int getStateCount(int state) {
+		return ordersDao.selectStateCountByState(state);
+	}
+	
+	public Order getOrder(int order_id) {
+		return ordersDao.selectByOrderId(order_id);
+	}
+	
+	public String getMainProduct(int order_id) {
+		return ordersDao.selectMainProductByOrderId(order_id);
+	}
 }
