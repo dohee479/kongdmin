@@ -14,8 +14,15 @@
   <base href="/"/>
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
+
+  <script src="controllers/usersController.js"></script>
+  <script src="controllers/questionsController.js"></script>
+  <script src="services/usersService.js"></script>
+  <script src="services/questionsService.js"></script>
+  <script src="services/authService.js"></script>
+
 </head>
-<body>
+<body ng-controller="mainController">
   <div class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-sm navbar-dark text-white font-weight-bold justify-content-between" style="background-color:#212529">
         <a class="navbar-brand" href="./">
@@ -23,7 +30,7 @@
         </a>
     </nav>
 
-    <div class="flex-grow-1 container-fluid" >
+    <div ng-show="uid" class="flex-grow-1 container-fluid" >
       <div class="row h-100">
         <div class="col-md-6 col-lg-2 p-3" style="background-color: #212529">
             <div class="h-100 d-flex flex-column">
@@ -33,19 +40,23 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-8 p-3">
-            <div class=" h-100 d-flex flex-column">
+        <div class="col-md-6 col-lg-10 p-3">
+          <div class=" h-100 d-flex flex-column">
             <div class="flex-grow-1 overflow-auto pr-3" style="height:0px">
                 <ng-view/>
             </div>
-            </div>
+            
+          </div>
         </div>
       </div>
+    </div>
+    <div ng-show="!uid">
+      <ng-include src="'login.html'"></ng-include>
     </div>
   </div>
 </body> 
 </html>
 <!-- 123 -->
-<!-- 운호 테스트-->
+<!-- 운호 테스트 -->
 <!-- 동호 테스트 -->
 <!-- 종현 테스트 -->

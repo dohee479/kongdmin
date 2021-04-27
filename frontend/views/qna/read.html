@@ -1,0 +1,41 @@
+<div class="card-body">
+  <div class="card">
+    <div class="card-header text-light bg-secondary">
+      <span class="font-weight-bold mr-2">{{question.question_id}})</span>{{question.question_title}}
+    </div>
+
+    <div class="card-body">
+      <div>
+        <div class="form-group">
+          <label>내용</label>
+          <textarea class="form-control" ng-value="question.question_content" readonly></textarea>
+        </div>
+        <div class="form-group">
+          <label>일시</label>
+          <input class="form-control" ng-value="question.question_date | date:'yyyy.MM.dd'" readonly/>
+        </div>
+        <div class="form-group">
+          <label>글쓴이</label>
+          <input class="form-control" ng-value="question.users_user_id" readonly/>
+        </div>
+        <div class="form-group ">
+          <label>상품명</label>
+          <input class="form-control" ng-value="question.product_title" readonly/>
+        </div>
+        <div class="form-group">
+          <label>답변</label>
+          <div class="input-group mb-3">
+            <textarea class="form-control" ng-model="question.question_answer" ng-value="question.question_answer" placeholder="답변을 입력해주세요."></textarea>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" ng-click="updateQuestion(question)">입력</button>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-secondary btn-sm" ng-click="getList(pager.pageNo)">목록</button>
+          <button class="btn btn-secondary btn-sm" ng-click="deleteQuestion(question.question_id)">삭제</button>       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
