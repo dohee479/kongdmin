@@ -75,4 +75,16 @@ angular.module("app", ["ngRoute"])
           }
         });
     };
+  })
+  .config(function() {
+  
+ 
+  })
+  .controller("mainController",function($scope,$location,$route) {
+    $scope.reloadable = (path) => {
+      if($location.url().includes(path)){
+          $route.reload();
+          
+      }
+  }
   });
