@@ -3,5 +3,7 @@
 <configuration>
    <typeAliases>
       <typeAlias alias="pager" type="com.mycompany.backend.dto.Pager" />
+      <typeAlias alias="user" type="com.mycompany.backend.dto.User" />
+      <typeAlias alias="question" type="com.mycompany.backend.dto.Question" />
    </typeAliases>
 </configuration>

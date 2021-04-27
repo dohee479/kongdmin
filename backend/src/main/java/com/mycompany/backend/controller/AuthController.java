@@ -29,10 +29,14 @@ public class AuthController {
 	// {"uid":"user1", "upassword":"12345"}
 	// dto로 user를 만들어 user로 받아도 되고 Map으로 받아도 된다.
 	public Map<String, String> login(@RequestBody Map<String, String> user) {
+		logger.info("컨트롤러 들어옴");
+		
 		// 인증 데이터 얻기
 		String uid = user.get("uid");
 		String upassword = user.get("upassword");
-
+		
+		logger.info(uid);
+		logger.info(upassword);
 		// 사용자 인증
 		UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(uid, upassword);
 		Authentication authentication = authenticationManager.authenticate(upat); // 인증을 테스트한다
@@ -47,6 +51,7 @@ public class AuthController {
 		Map<String, String> map = new HashMap<>();
 		map.put("uid", uid);
 		map.put("authToken", jwt);
+		logger.info(map+"");
 		return map;
 		
 	}
