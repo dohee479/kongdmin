@@ -1,0 +1,67 @@
+<style>
+  @import url("../css/product/list.css");
+</style>
+
+<div class="container">
+  <div>
+    <select ng-model="keyword">
+      <option value="">검색분류</option>
+      <option ng-repeat="keyword in keywords">{{keyword}}</option>
+    </select>
+    <div>
+      <input type="text" ng-model="kcontent">
+      <button ng-click="getProductList(keyword, kcontent, 1, '')">검색</button>
+    </div>
+  </div>
+  <div>
+    <button ng-click="delete(deleteGroup)">{{deleteGroup}}</button>
+  </div>
+  <div>
+    <table class="table">
+      <thead class="thead-dark" class="row">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" ng-click="changeSort(); getProductList(keyword, kcontent, pager.pageNo, sort)" >별점</th>
+          <th scope="col">이미지</th>
+          <th scope="col">상품명</th>
+          <th scope="col">나라</th>
+          <th scope="col">향/맛</th>
+          <th scope="col">판매량</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="product in products">
+            <td><input type="checkbox"
+              ng-true-value="{{product.product_id}}"
+              ng-false-value="null"
+              ng-model="deleteGroup[$index]"
+              ng-change="addDelete($index)"
+              /></td>
+            <td>{{product.product_grade}}3</td>
+            <td><img src="{{getProductImg(product.product_id)}}" width="100"></td>
+            <td id="product-title{{product.product_id}}" ng-click="toggle(product.product_id)">{{product.product_title}}</td>
+            <td>{{product.product_country}}</td>
+            <td>{{product.product_taste}}</td>
+            <td>{{product.product_sale_count}}</td>               
+          </tr>
+      </tbody>
+    </table>    
+    <div>
+      <div colspan="6" style="text-align: center;">
+        <button class="page-btn" 
+                    ng-click="getProductList(keyword, kcontent, 1, sort)"><<</button> 
+        <button class="page-btn" 
+                    ng-show="pager.groupNo>1" 
+                    ng-click="getProductList(keyword, kcontent, pager.startPageNo-1, sort)"><</button>
+        <button ng-repeat="i in pageRange"
+                  class="page-btn {{(pager.pageNo==i)?'':''}} {{!$last?'mr-1':''}}" 
+                    ng-click="getProductList(keyword, kcontent, i, sort)">{{i}}</button>
+        <button class="page-btn" 
+                    ng-show="pager.groupNo < pager.totalGroupNo" 
+                    ng-click="getProductList(keyword, kcontent, pager.endPageNo+1, sort)">></button>
+        <button class="page-btn" 
+                    ng-click="getProductList(keyword, kcontent, pager.totalPageNo, sort)">>></button>
+      </div>
+    </div>
+  </div>
+</div>

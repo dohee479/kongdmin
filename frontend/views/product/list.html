@@ -1,1 +1,78 @@
-<div></div>
+<style>
+  @import url("../resources/css/product/list.css");
+</style>
+
+
+<div id="infinite" class="container py-5">
+  <div class="row text-center mb-5">
+    <div class="col-lg-7 mx-auto">
+      <h1 class="display-4 text-black" style="font-size: 2rem">Product List</h1>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-5 mb-5">
+    <select class="search-select mr-3" ng-model="keyword" >
+      <option value="">검색분류</option>
+      <option ng-repeat="keyword in keywords">{{keyword}}</option>
+    </select>
+    <div>
+      <input class="search-input" type="text" ng-model="kcontent" ng-enter="getProductList(keyword, kcontent, 1, '')">
+      <button class="search-btn" ng-click="getProductList(keyword, kcontent, 1, '')"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+  <div class="text-right mb-2" style="padding-right:17%">
+    <button class="delete-btn btn" ng-click="delete(deleteGroup)">삭제</button>
+  </div>
+  <div  class="row">
+    <div class="col-lg-8 mx-auto">
+      <ul class="list-group shadow">
+        <li class="list-group-item" ng-repeat="product in products">
+          <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="pr-2">
+              <input type="checkbox"
+                  ng-click="addDelete($index, product.product_id)"
+                  ng-checked="checked($index, product.product_id)"
+                  />
+            </div>
+            <div class="media-body order-2 order-lg-1 pl-3">
+              <h5 class="mt-0 font-weight-bold mb-2">{{product.product_title}}</h5>
+              <p class="font-italic text-muted mb-0 small">#{{product.product_country}} | {{product.product_taste}}</p>
+              <div class="d-flex align-items-center justify-content-between mt-1">
+                <div>
+                  <h6 class="font-weight-bold my-2" ng-click="sortSale()">판매량: {{product.product_sale_count}}</h6>
+                  <h6 class="font-weight-bold my-2">₩{{product.product_price}}</h6>
+                </div>
+                <ul class="list-inline small" ng-click="changeSort()">
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="product.product_grade >= 1" class="fa fa-star text-success"></i>
+                    <i ng-show="product.product_grade < 1" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0">
+                    <i ng-show="product.product_grade >= 2" class="fa fa-star text-success"></i>
+                    <i ng-show="product.product_grade < 2" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="product.product_grade >= 3" class="fa fa-star text-success"></i>
+                    <i ng-show="product.product_grade < 3" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="product.product_grade >= 4" class="fa fa-star text-success"></i>
+                    <i ng-show="product.product_grade < 4" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="product.product_grade == 5" class="fa fa-star text-success" ></i>
+                    <i ng-show="product.product_grade < 5" class="fa fa-star-o text-gray"></i>
+                  </li>
+                </ul>
+              </div>
+            </div><img src="{{getProductImg(product.product_id)}}" alt="Generic placeholder image" width="100" class="ml-lg-5 order-1 order-lg-2">
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div ng-show="loading" class="loader"></div>
+  <div ng-show="!loading" class="mt-3 text-center">
+    no more data:)
+  </div>
+</div>
+
