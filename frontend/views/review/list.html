@@ -3,101 +3,104 @@
 </style>
 
 <div class="container">
-  <div class="text-center mt-5">
-    <p class="review-list-title">Review List</p>
-  </div>
-  <div class="review-search d-flex justify-content-center mt-5 mb-5">
-    <select class="search-select mr-3" ng-model="keyword">
-      <option value="">검색분류</option>
-      <option ng-repeat="keyword in keywords">{{keyword}}</option>
-    </select>
-    <div>
-      <input class="search-input" type="text" ng-model="kcontent" placeholder="검색어를 입력하세요" ng-enter="getReviewList(keyword, kcontent, 1, '')">
-      <button class="search-btn" ng-click="getReviewList(keyword, kcontent, 1, '')"><i class="fas fa-search"></i></button>
+  <div style="position: relative; top:100px;">
+    <div class="text-center">
+      <p class="review-list-title">Review List</p>
     </div>
-  </div>
-  <div class="text-right mb-2">
-    <button class="delete-btn btn" ng-click="delete()">삭제</button>
-  </div>
-  <div>
-    <table class="table text-center" id="review-table">
-      <thead class="thead-dark" class="row">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col" ng-click="changeSort(); getReviewList(keyword, kcontent, pager.pageNo, sort)" >별점</th>
-          <th scope="col">제목</th>
-          <th scope="col">상품명</th>
-          <th scope="col">작성자</th>
-          <th scope="col">날짜</th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="review in reviews" >
-          <tr>
-            <td><input type="checkbox"
-              ng-click="addDelete($index, review.review_id)"
-              ng-checked="checked($index, review.review_id)"
-              /></td>
-            <td>                
-              <ul class="list-inline small">
-                <li class="list-inline-item m-0" ng-show="review.review_grade >= 1"><i class="fa fa-star text-success"></i></li>
-                <li class="list-inline-item m-0">
-                  <i ng-show="review.review_grade >= 2" class="fa fa-star text-success"></i>
-                  <i ng-show="review.review_grade < 2" class="fa fa-star-o text-gray"></i>
-                </li>
-                <li class="list-inline-item m-0" >
-                  <i ng-show="review.review_grade >= 3" class="fa fa-star text-success"></i>
-                  <i ng-show="review.review_grade < 3" class="fa fa-star-o text-gray"></i>
-                </li>
-                <li class="list-inline-item m-0" >
-                  <i ng-show="review.review_grade >= 4" class="fa fa-star text-success"></i>
-                  <i ng-show="review.review_grade < 4" class="fa fa-star-o text-gray"></i>
-                </li>
-                <li class="list-inline-item m-0" >
-                  <i ng-show="review.review_grade == 5" class="fa fa-star text-success" ></i>
-                  <i ng-show="review.review_grade < 5" class="fa fa-star-o text-gray"></i>
-                </li>
-              </ul>
-            </td>
-            <td id="review-title{{review.review_id}}" ng-click="toggle(review.review_id)">{{review.review_title}}</td>
-            <td>{{review.product_title}}</td>
-            <td>{{review.users_user_id}}</td>
-            <td>{{review.review_date.slice(0, 10)}}</td>               
-          </tr>
-          <tr>          
-            <td colspan="6" class="p-0 text-left">
-              <div id="review-detail{{review.review_id}}" style="display:none; background-color:#f8f8f8">
-                <p class="p-4">{{review.review_content}}</p>
-                <div ng-hide="review.review_attachsname === 'null'">
-                  <img src="{{getReviewImg(review.review_id)}}" class="detail-img">
-                </div>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>    
-    <div ng-show="pager.totalRows != 0">
-      <div colspan="6" style="text-align: center;">
-        <button class="page-btn"  style="border: none; outline: none;  background-color: #FFFFFF;"
-                    ng-click="getReviewList(keyword, kcontent, 1, sort)"><<</button> 
-        <button class="page-btn" style="border: none; outline: none;  background-color: #FFFFFF;" 
-                    ng-show="pager.groupNo>1" 
-                    ng-click="getReviewList(keyword, kcontent, pager.startPageNo-1, sort)"><</button>
-        <button ng-repeat="i in pageRange"
-                style="width: 35px; height: 35px; border: solid white; padding: 5px; margin: 3px; border: none; outline: none;"
-                ng-style="{ 'background-color' : (pager.pageNo==i) ? '#EEEEEE' : '#FFFFFF', 'border-radius' : (pager.pageNo==i) ? '50%' : '' }"
-                ng-click="getReviewList(keyword, kcontent, i, sort)">{{i}}</button>
-        <button class="page-btn" 
-                    style="border: none; outline: none;  background-color: #FFFFFF;"
-                    ng-show="pager.groupNo < pager.totalGroupNo" 
-                    ng-click="getReviewList(keyword, kcontent, pager.endPageNo+1, sort)">></button>
-        <button class="page-btn" 
-                    style="border: none; outline: none;  background-color: #FFFFFF;"
-                    ng-click="getReviewList(keyword, kcontent, pager.totalPageNo, sort)">>></button>
+    <div class="review-search d-flex justify-content-center mt-5 mb-5">
+      <select class="search-select mr-3" ng-model="keyword">
+        <option value="">검색분류</option>
+        <option ng-repeat="keyword in keywords">{{keyword}}</option>
+      </select>
+      <div>
+        <input class="search-input" type="text" ng-model="kcontent" placeholder="검색어를 입력하세요" ng-enter="getReviewList(keyword, kcontent, 1, '')">
+        <button class="search-btn" ng-click="getReviewList(keyword, kcontent, 1, '')"><i class="fas fa-search"></i></button>
       </div>
     </div>
-    <div ng-show="pager.totalRows == 0" class="text-center">
-      <img src="../resources/img/searchfail.jpg">
+    <div class="text-right mb-2">
+      <button class="delete-btn btn" ng-click="delete()">삭제</button>
     </div>
+    <div>
+      <table class="table text-center" id="review-table">
+        <thead class="thead-dark" class="row">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" ng-click="changeSort(); getReviewList(keyword, kcontent, pager.pageNo, sort)" >별점</th>
+            <th scope="col">제목</th>
+            <th scope="col">상품명</th>
+            <th scope="col">작성자</th>
+            <th scope="col">날짜</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="review in reviews" >
+            <tr>
+              <td><input type="checkbox"
+                ng-click="addDelete($index, review.review_id)"
+                ng-checked="checked($index, review.review_id)"
+                /></td>
+              <td>                
+                <ul class="list-inline small">
+                  <li class="list-inline-item m-0" ng-show="review.review_grade >= 1"><i class="fa fa-star text-success"></i></li>
+                  <li class="list-inline-item m-0">
+                    <i ng-show="review.review_grade >= 2" class="fa fa-star text-success"></i>
+                    <i ng-show="review.review_grade < 2" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="review.review_grade >= 3" class="fa fa-star text-success"></i>
+                    <i ng-show="review.review_grade < 3" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="review.review_grade >= 4" class="fa fa-star text-success"></i>
+                    <i ng-show="review.review_grade < 4" class="fa fa-star-o text-gray"></i>
+                  </li>
+                  <li class="list-inline-item m-0" >
+                    <i ng-show="review.review_grade == 5" class="fa fa-star text-success" ></i>
+                    <i ng-show="review.review_grade < 5" class="fa fa-star-o text-gray"></i>
+                  </li>
+                </ul>
+              </td>
+              <td id="review-title{{review.review_id}}" ng-click="toggle(review.review_id)">{{review.review_title}}</td>
+              <td>{{review.product_title}}</td>
+              <td>{{review.users_user_id}}</td>
+              <td>{{review.review_date.slice(0, 10)}}</td>               
+            </tr>
+            <tr>          
+              <td colspan="6" class="p-0 text-left">
+                <div id="review-detail{{review.review_id}}" style="display:none; background-color:#f8f8f8">
+                  <p class="p-4">{{review.review_content}}</p>
+                  <div ng-hide="review.review_attachsname === 'null'">
+                    <img src="{{getReviewImg(review.review_id)}}" class="detail-img">
+                  </div>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>    
+      <div ng-show="pager.totalRows != 0">
+        <div colspan="6" style="text-align: center;">
+          <button class="page-btn"  style="border: none; outline: none;  background-color: #f8f9fa;"
+                      ng-click="getReviewList(keyword, kcontent, 1, sort)"><<</button> 
+          <button class="page-btn" style="border: none; outline: none;  background-color: #f8f9fa;" 
+                      ng-show="pager.groupNo>1" 
+                      ng-click="getReviewList(keyword, kcontent, pager.startPageNo-1, sort)"><</button>
+          <button ng-repeat="i in pageRange"
+                  style="width: 35px; height: 35px; border: solid #f8f9fa; padding: 5px; margin: 3px; border: none; outline: none;"
+                  ng-style="{ 'background-color' : (pager.pageNo==i) ? '#adb5bd' : '#f8f9fa', 'border-radius' : (pager.pageNo==i) ? '50%' : '' }"
+                  ng-click="getReviewList(keyword, kcontent, i, sort)">{{i}}</button>
+          <button class="page-btn" 
+                      style="border: none; outline: none;  background-color: #f8f9fa;"
+                      ng-show="pager.groupNo < pager.totalGroupNo" 
+                      ng-click="getReviewList(keyword, kcontent, pager.endPageNo+1, sort)">></button>
+          <button class="page-btn" 
+                      style="border: none; outline: none;  background-color: #f8f9fa;"
+                      ng-click="getReviewList(keyword, kcontent, pager.totalPageNo, sort)">>></button>
+        </div>
+      </div>
+      <div ng-show="pager.totalRows == 0" class="text-center">
+        <img src="../resources/img/searchfail.jpg">
+      </div>
+    </div>
+
   </div>
 </div>
 

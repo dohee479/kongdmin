@@ -35,7 +35,7 @@ public class ReviewController {
 		searchReview.put("kcontent", kcontent);
 		searchReview.put("sort", sort);
 		int totalRows = reviewsService.getCount(searchReview);
-		Pager pager = new Pager(8, 5, totalRows, pageNo);
+		Pager pager = new Pager(10, 5, totalRows, pageNo);
 		searchReview.put("startRowNo", pager.getStartRowNo());
 		searchReview.put("endRowNo", pager.getEndRowNo());
 		System.out.println(searchReview);

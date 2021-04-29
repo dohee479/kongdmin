@@ -19,6 +19,7 @@
 
 .search-input {
   border: 0;
+  background-color: #f8f9fa;
   border-bottom: 2px solid #9b9b9b;
 }
 
@@ -34,6 +35,7 @@
 .search-select {
   border: 0;
   border-bottom: 2px solid #9b9b9b;
+  background-color: #f8f9fa;
 }
 
 .delete-btn {
