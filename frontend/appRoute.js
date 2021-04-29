@@ -9,8 +9,6 @@ angular.module("app")
 
     // 라우트 정의
     $routeProvider
-    .when("/", {templateUrl: "views/home/home.html"})
-    //.when("/login", {templateUrl: "login.html", controller:"mainController"})
     .when("/user", {templateUrl: "views/user/index.html", controller:"usersController"})
     .when("/question", {templateUrl: "views/qna/index.html", controller:"questionsController"})
     .when("/order", {templateUrl: "views/order/index.html", controller: "orderController"})

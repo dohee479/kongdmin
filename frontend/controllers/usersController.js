@@ -25,9 +25,10 @@ angular.module("app")
           for(var i=$scope.pager.startPageNo; i<=$scope.pager.endPageNo; i++) {
             $scope.pageRange.push(i);
           }
-          console.log("Response-Data-Pager: "+response.data.pager);
-          console.log("response: "+response);
-          console.log("pageRange "+$scope.pageRange);
+          console.log(response.data);
+          //console.log("Response-Data-Pager: "+response.data.pager);
+          //console.log("response: "+response);
+          //console.log("pageRange "+$scope.pageRange);
           $scope.view = "list";
         });
     };
