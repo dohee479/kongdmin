@@ -62,11 +62,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			// 요청 경로 권한 설정
 			.antMatchers("/").permitAll()
 			// USER라고 줘도 대지만 DB에는 ROLE_USER 형식으로 저장되어야 한다
-			.antMatchers(HttpMethod.GET, "/user").hasAnyRole("ADMIN")
-			.antMatchers(HttpMethod.DELETE, "/user/*").hasAnyRole("ADMIN")
-			.antMatchers(HttpMethod.GET, "/question").hasAnyRole("ADMIN")
-			.antMatchers(HttpMethod.PUT, "/question").hasAnyRole("ADMIN")
-			.antMatchers(HttpMethod.DELETE, "/question/*").hasAnyRole("ADMIN")
+				/*
+				 * .antMatchers(HttpMethod.GET, "/user").hasAnyRole("ADMIN")
+				 * .antMatchers(HttpMethod.DELETE, "/user/*").hasAnyRole("ADMIN")
+				 * .antMatchers(HttpMethod.GET, "/question").hasAnyRole("ADMIN")
+				 * .antMatchers(HttpMethod.PUT, "/question").hasAnyRole("ADMIN")
+				 * .antMatchers(HttpMethod.DELETE, "/question/*").hasAnyRole("ADMIN")
+				 */
 			// 그 이외의 모든 경로 허가
 			.antMatchers("/**").permitAll();
 	}
