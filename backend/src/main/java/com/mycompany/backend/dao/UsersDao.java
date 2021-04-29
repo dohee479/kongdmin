@@ -17,4 +17,5 @@ public interface UsersDao {
    public User selectById(String user_id);
    public int deleteById(String user_id);
    public Integer totalPay(String user_id);
+   public int selectMemberCount();
 }

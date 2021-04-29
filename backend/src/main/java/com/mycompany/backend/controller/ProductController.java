@@ -1,5 +1,6 @@
 package com.mycompany.backend.controller;
 
+
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import com.mycompany.backend.service.ProductsService;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+
 
 	@Autowired
 	private ProductsService productsService;

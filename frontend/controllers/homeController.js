@@ -1,5 +1,21 @@
 angular.module("app")
   .controller("homeController", function($scope,homeService) {
+    //회원 수
+    homeService.memberCount()
+      .then((response) =>{
+        $scope.memberCount=response.data;
+      })
+    //등록된 상품 수
+    homeService.productCount()
+      .then((response) =>{
+        $scope.totalProductCount=response.data;
+      })
+    //총 주문 수
+    homeService.orderCount()
+      .then((response) =>{
+        $scope.totalOrderCount=response.data;
+      })
+
     //월별 수익 현황
     homeService.monthpriceList()
       .then((response) =>{
@@ -61,7 +77,9 @@ angular.module("app")
             data: [
             {
               type: "pie",
+              click:onClickCountry,
               indexLabelPlacement: "outside",
+              indexLabel: "{label} - {y}",
               dataPoints: $scope.CountryCountList
             }
             ]
@@ -92,7 +110,9 @@ angular.module("app")
           data: [
           {
             type: "pie",
+            click:onClickTaste,
             indexLabelPlacement: "outside",
+            indexLabel: "{label} - {y}",
             dataPoints: $scope.TasteCountList
           }
           ]
@@ -132,8 +152,25 @@ angular.module("app")
           $scope.chart4.render();
 
         })
+       
 
-    
+    function onClickCountry(e){
+      $scope.country=e.dataPoint.label;
+      homeService.productBycountryList($scope.country)
+        .then((response) =>{
+          $scope.products=response.data;
+        })
+      $scope.$apply();
+    }
+    function onClickTaste(e){
+      $scope.taste=e.dataPoint.label;
+      homeService.productBytasteList($scope.taste)
+        .then((response) =>{
+          $scope.products2=response.data;
+        })
+      $scope.$apply();
+    }
+
     function monthToString(month){
       switch(month){
         case '01' : month="Jan"; break;
