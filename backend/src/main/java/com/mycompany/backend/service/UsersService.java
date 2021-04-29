@@ -17,10 +17,22 @@ public class UsersService {
    public int getCount() {
       return usersDao.count();
    }
-
+   
+   public int getCountSearch(String keyword) {
+	      return usersDao.countSearch(keyword);
+   }
+   
+   public String getAuthority(String user_id) {
+	   return usersDao.userAuthority(user_id);
+   }
+   
    public List<User> getList(Pager pager) {
       return usersDao.selectByPage(pager);
    }
+   
+   public List<User> getSearchList(Pager pager) {
+	      return usersDao.selectBySearch(pager);
+	   }
    
    public User getUser(String user_id) {
 	  return usersDao.selectById(user_id);

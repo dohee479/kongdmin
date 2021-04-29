@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.backend.security.JwtUtil;
+import com.mycompany.backend.service.UsersService;
 
 @RestController
 @RequestMapping("/auth")
@@ -24,6 +25,9 @@ public class AuthController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private UsersService usersService;
 	
 	@PostMapping("/login")
 	// {"uid":"user1", "upassword":"12345"}
@@ -34,6 +38,10 @@ public class AuthController {
 		// 인증 데이터 얻기
 		String uid = user.get("uid");
 		String upassword = user.get("upassword");
+		
+		String uauthority=usersService.getAuthority(uid);
+		String ucompare=new String("ROLE_USER");
+		logger.info("권한: )"+uauthority);
 		
 		logger.info(uid);
 		logger.info(upassword);
@@ -49,8 +57,15 @@ public class AuthController {
 		
 		// JSON 응답 보내기
 		Map<String, String> map = new HashMap<>();
-		map.put("uid", uid);
+		
+		if(uauthority.equals(ucompare)) {
+			logger.info("----권한이 일반유저----------");
+			map.put("uid", "0");
+		}else {
+			map.put("uid", uid);
+		}
 		map.put("authToken", jwt);
+		
 		logger.info(map+"");
 		return map;
 		

@@ -1,0 +1,89 @@
+#home {
+  padding-left: 220px;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+.adminEnabled{
+  padding: 15px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.adminLogout{
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 14px; 
+}
+
+.copyright{
+  text-align: center;
+  font-weight: 600;
+  position: absolute;
+  bottom: 30px;
+  font-size: 13px;
+}
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 220px;
+  width: 220px;
+  height: 100%;
+  margin-left: -220px;
+  background: #fcfcfc;
+}
+
+#sidebar header {
+  background-color: #534847;
+  line-height: 50px;
+  text-align: center;
+}
+
+#sidebar header img{
+  vertical-align: middle;
+  width: 160px;
+}
+
+#sidebar header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav a{
+  background: none;
+  color: #495057;
+  font-size: 14px;
+  padding: 12px;
+  padding-left: 30px;
+  font-weight: 700;
+}
+
+#sidebar .nav a:hover{
+  background: #534847;
+  color: #ECEFF1;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
+  font-size: 20px;
+}
+
+#sidebar .nav .subtitle{
+  padding-left: 90px;
+}
+
+#sidebar .nav .title{
+  position: fixed;
+  left: 70px;
+}

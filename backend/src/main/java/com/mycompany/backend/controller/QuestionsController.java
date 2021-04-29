@@ -33,6 +33,9 @@ public class QuestionsController {
 	public Map<String, Object> list(@RequestParam(defaultValue="1") int pageNo) {
 		//@RequestParam: 단일파라미터를 전달받을때사용
 		int totalRows=questionsService.getCount();
+		if(totalRows==0) {
+			totalRows=1;
+		}
 		Pager pager=new Pager(5,5,totalRows,pageNo);
 		List<Question> list=questionsService.getList(pager);
 		Map<String, Object> map=new HashMap<>();

@@ -28,11 +28,31 @@ public class UsersController {
 	
 	// 페이지 단위로 유저의 목록 보기
 	@GetMapping("")
-	public Map<String, Object> list(@RequestParam(defaultValue="1") int pageNo) {
+	public Map<String, Object> list(int pageNo,String keyword) {
 		//@RequestParam: 단일파라미터를 전달받을때사용
-		int totalRows=usersService.getCount();
-		Pager pager=new Pager(5,5,totalRows,pageNo);
-		List<User> list=usersService.getList(pager);
+		logger.info("list컨트롤러 진입, pageNo: "+pageNo);
+		logger.info("keyword값: "+keyword);
+		int totalRows;
+		List<User> list;
+		Pager pager;
+		
+		if(keyword==null||keyword.length()==0) { //키워드가 안들어갔을때
+			logger.info("keyword값이 null일때이벤트: "+keyword);
+			totalRows=usersService.getCount();
+			pager=new Pager(5,5,totalRows,pageNo);
+			list=usersService.getList(pager);
+		}else { //키워드가 입력되었거나, 바뀔때
+			logger.info("--keyword값 있을때의 이벤트--");
+			totalRows=usersService.getCountSearch(keyword);
+			logger.info("keyword값 있을때의 컬럼개수(totalRows): "+totalRows);
+			if(totalRows==0) {
+				totalRows=1;
+			}
+			pager=new Pager(5,5,totalRows,pageNo);
+			pager.setKeyword(keyword);
+			list=usersService.getSearchList(pager);
+		}
+		
 		Map<String, Object> map=new HashMap<>();
 		map.put( "pager" , pager);
 		map.put( "users", list);
