@@ -3,6 +3,8 @@
 <configuration>
    <typeAliases>
       <typeAlias alias="pager" type="com.mycompany.backend.dto.Pager" />
+      <typeAlias alias="product" type="com.mycompany.backend.dto.Product" />
+      <typeAlias alias="review" type="com.mycompany.backend.dto.Review" />
       <typeAlias alias="user" type="com.mycompany.backend.dto.User" />
       <typeAlias alias="question" type="com.mycompany.backend.dto.Question" />
       <typeAlias alias="order" type="com.mycompany.backend.dto.Order"/>
@@ -10,6 +12,5 @@
       <typeAlias alias="orderProduct" type="com.mycompany.backend.dto.OrderProduct"/>
       <typeAlias alias="monthlydata" type="com.mycompany.backend.dto.MonthlyData" />
       <typeAlias alias="ordercount" type="com.mycompany.backend.dto.OrderCount" />
-      
    </typeAliases>
 </configuration> 

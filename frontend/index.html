@@ -18,13 +18,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
   <base href="/"/>
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
-
   <script src="controllers/usersController.js"></script>
   <script src="controllers/questionsController.js"></script>
   <script src="services/usersService.js"></script>
@@ -36,10 +35,12 @@
   <script src="controllers/homeController.js"></script>
   <script src="controllers/calendarController.js"></script>
   
+  <script src="controllers/productsController.js"></script>
+  <script src="services/productsService.js"></script>
+  <script src="controllers/reviewsController.js"></script>
+  <script src="services/reviewsService.js"></script>
 </head>
 <body ng-controller="mainController">
-  <!--수정전-->
-<!--이거로 바꿔야함-->
   <div id="home">
     <div ng-show="uid">
       <div id="sidebar">
@@ -55,9 +56,6 @@
           로그아웃  <i class="fas fa-sign-out-alt"></i>  
         </div>
         <ng-include src="'appMenu.html'"></ng-include>
-        <!-- <div class="copyright">
-          <span>Coptyright ⓒ 콩콩콩</span>
-        </div> -->
       </div>
       <div id="content">
         <ng-view/>
@@ -67,6 +65,5 @@
       <ng-include src="'login.html'"></ng-include>
     </div>
   </div>
- <!--여기까지--> 
 </body> 
 </html>
