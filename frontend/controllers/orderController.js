@@ -5,24 +5,25 @@ angular.module("app")
     })
 
     $scope.view = "list";
+    $scope.search = {};
     $scope.getView = () => {
       switch($scope.view){
         case "list" : return "views/order/list.html"
         case "read" : return "views/order/read.html"
       }
     };
-
-    $scope.search = {};
+    
     $scope.getList = (pageNo, state) => {
-      $scope.sel = 
-        {s7: false,
+ 
+      $scope.sel = {
+         s7: false,
          s1: false,
          s5: false,
-         s9: false
+         s9: false,
+         s2: false,
+         s3: false
         }
       
-      // const str = "s" + $scope.state;
-      // $scope.search.str = true;
       if(state == 1)
         $scope.sel.s1 = true;
 
@@ -34,10 +35,24 @@ angular.module("app")
 
       if(state == 9)
         $scope.sel.s9 = true;
-      
 
+      if(state == 2)
+        $scope.sel.s2 = true;
+
+      if(state == 3)
+        $scope.sel.s3 = true;    
+      
       $scope.state = state;
-      orderService.list(pageNo, state, $scope.search.user_id)
+      
+      orderService.list(pageNo, 
+                        state, 
+                        $scope.search.user_id, 
+                        $scope.search.fromPrice, 
+                        $scope.search.toPrice,
+                        $scope.search.fromDate,
+                        $scope.search.toDate,
+                        $scope.search.sortDsc)
+
         .then((response) => {
           $scope.pager = response.data.pager;
           $scope.orders = response.data.order;
@@ -50,7 +65,13 @@ angular.module("app")
         });
     };
 
+    $scope.sortDsc = (state) =>{
+      $scope.search.sortDsc=true;
+      $scope.getList(1,state);
+    }
+
     $scope.read = (order_id) => {
+      $scope.isModifyed = false;
       orderService.read(order_id)
         .then((response) => {
           $scope.order = response.data.order;
@@ -59,32 +80,24 @@ angular.module("app")
         });
     };
 
-    // $scope.searchByUserId = (pagneNo, state) => {
-    //   console.log(pagneNo + "" + state + "" + $scope.search_user_id)
-    //    orderService.search(pageNo, state, search_user_id)
-    //      .then((response) => {
-
-    //      });
-    // }
- 
-    $scope.getMainProduct = (order_id) => {
-      orderService.getMainProduct(order_id)
-        .then((response) => {
-          console.log(response.data.mainProduct);
-          //$scope.mainProduct = response.data.mainProduct;
+    $scope.changeState = (order_id, changeState) => {
+      orderService.changeState(order_id, changeState)
+        .then((response)=> {
+          $scope.order = response.data.order;
+          $scope.orderProducts = response.data.orderProducts;   
+          $scope.view = "read";
         });
-      
-      //return orderService.getMainProduct(order_id);
-    }
+    };
 
+    $scope.updateOrder = (order) =>{
+      if(order){
+        orderService.updateOrder(order)
+          .then((response) => {
+            $scope.read(order.order_id);
+            $scope.view = "read";
+            $scope.isModifyed = true;
+          })
 
-    // function getMainProduct(order_id, $scope){
-    //   console.log(order_id);
-    //   orderService.getMainProduct(order_id)
-    //    .then((response) => {
-    //      $scope.mainProduct=response.data.mainProduct;
-    //      $scope.view="list";
-         
-    //   })
-    // }
+      }
+    };
   })

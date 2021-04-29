@@ -1,55 +1,60 @@
-<div class="d-flex mb-4 calendarTop">
-  <button  class="btn btn-outline-dark" ng-click="prevMonth()"><</button>
-  <div class="calendarTitle"><parm>{{monthList[currentDate.month-1]}}</parm>  {{currentDate.year}}</div>
-  <button class="btn btn-outline-dark" ng-click="nextMonth()">></button>
-  <div class="monthTotalPrice"> 월 매출: {{monthTotalPrice}}</div>
-</div>
-<div class="d-flex">
-  <table class="table table-bordered w-75 calendar">
-    <thead>
-      <tr>
-        <th class="text-danger">Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th class="text-primary">Sat</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="week in weekly" >
-        <td ng-repeat="day in week  track by $index" ng-if="$index===0" class="text-danger text-center" ng-click="date_click(day)">
-          {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price}}원</div>
-        </td>
-        <td  ng-repeat="day in week  track by $index" ng-if="$index!=0 && $index!=6" class="text-center" ng-click="date_click(day)">
-          {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price}}원</div>
-        <td ng-repeat="day in week  track by $index" ng-if="$index===6" class="text-primary text-center" ng-click="date_click(day)">
-          {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price}}원</div>
-        </td>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="order_info">
-    <div class="date_title text-center"> {{click_year}} {{monthList[click_month-1]}} {{click_date}}</div>
-    <table class="table table-bordered" >
+<div>
+  <div class="d-flex mb-4 calendarTop">
+    <div class="mt-5 d-flex">
+      <button  class="btn btn-outline-dark" ng-click="prevMonth()"><</button>
+      <div class="calendarTitle"><parm>{{monthList[currentDate.month-1]}}</parm>  {{currentDate.year}}</div>
+      <button class="btn btn-outline-dark" ng-click="nextMonth()">></button>
+      <div class="monthTotalPrice"> 월 매출: {{monthTotalPrice | number}}</div>
+    </div>
+    
+  </div>
+  <div class="d-flex">
+    <table class="table table-bordered w-75 calendar">
       <thead>
-        <tr ng-show="dateOrderList[0]">
-          <th>주문번호</th>
-          <th>주문자</th>
-          <th>금액</th>
+        <tr>
+          <th class="text-danger">Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th class="text-primary">Sat</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="dateOrder in dateOrderList">
-          <td>{{dateOrder.order_id}}</td>
-          <td>{{dateOrder.order_account_name}}</td>
-          <td>{{dateOrder.order_total_price}}</td>
+        <tr ng-repeat="week in weekly" >
+          <td ng-repeat="day in week  track by $index" ng-if="$index===0" class="text-danger text-center" ng-click="date_click(day)">
+            {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price | number}}원</div>
+          </td>
+          <td  ng-repeat="day in week  track by $index" ng-if="$index!=0 && $index!=6" class="text-center" ng-click="date_click(day)">
+            {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price | number}}원</div>
+          <td ng-repeat="day in week  track by $index" ng-if="$index===6" class="text-primary text-center" ng-click="date_click(day)">
+            {{day.date}}<div ng-if="day.date" class="text-left mt-4">매출:{{day.order_total_price | number}}원</div>
+          </td>
+          </td>
         </tr>
       </tbody>
     </table>
-    <div>주문 개수 : {{dateOrderList.length}}</div>
-    <div>하루 매출 : {{dateTotalPrice}}</div>
+    <div class="order_info">
+      <div class="date_title text-center"> {{click_year}} {{monthList[click_month-1]}} {{click_date}}</div>
+      <table class="table table-bordered" >
+        <thead>
+          <tr ng-show="dateOrderList[0]">
+            <th>주문번호</th>
+            <th>주문자</th>
+            <th>금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="dateOrder in dateOrderList">
+            <td>{{dateOrder.order_id}}</td>
+            <td>{{dateOrder.order_account_name}}</td>
+            <td>{{dateOrder.order_total_price | number}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>주문 개수 : {{dateOrderList.length}}</div>
+      <div>하루 매출 : {{dateTotalPrice | number}}</div>
+    </div>
   </div>
 </div>
