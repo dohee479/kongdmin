@@ -23,8 +23,12 @@
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
 
+  <script src="controllers/usersController.js"></script>
+  <script src="controllers/questionsController.js"></script>
+  <script src="services/usersService.js"></script>
+  <script src="services/questionsService.js"></script>
+  <script src="services/authService.js"></script>
   <script src="controllers/orderController.js"></script>
-
   <script src="services/orderService.js"></script>
   <script src="services/homeService.js"></script>
   <script src="controllers/homeController.js"></script>
@@ -32,27 +36,32 @@
   
 </head>
 <body ng-controller="mainController">
+  <!--수정전-->
+<!--이거로 바꿔야함-->
   <div id="home">
-    <div id="sidebar">
-      <header>
-        <a href="#">
-          <img src="./resources/img/logo2.png"/>
-        </a>
-      </header>
-      <div class="adminEnabled">
-        관리자님 안녕하세요!
+    <div ng-show="uid">
+      <div id="sidebar">
+        <header>
+          <a href="#!/home">
+            <img src="./resources/img/logo2.png"/>
+          </a>
+        </header>
+        <div class="adminEnabled">
+          관리자님 안녕하세요!
+        </div>
+        <ng-include src="'appMenu.html'"></ng-include>
+        <!-- <div class="copyright">
+          <span>Coptyright ⓒ 콩콩콩</span>
+        </div> -->
       </div>
-      <div class="adminLogout">
-        로그아웃  <i class="fas fa-sign-out-alt"></i>  
-      </div>
-      <ng-include src="'appMenu.html'"></ng-include>
-      <!-- <div class="copyright">
-        <span>Coptyright ⓒ 콩콩콩</span>
-      </div> -->
-    </div>
       <div id="content">
-      <ng-view/>
+        <ng-view/>
+      </div>
+    </div>
+    <div ng-show="!uid">
+      <ng-include src="'login.html'"></ng-include>
     </div>
   </div>
+ <!--여기까지--> 
 </body> 
 </html>

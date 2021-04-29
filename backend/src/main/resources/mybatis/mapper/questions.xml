@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.QuestionsDao">
+   <select id="selectByPage" parameterType="pager" resultType="question">
+      select rnum, question_id, question_title, users_user_id, products_product_id, question_date, question_answer
+      from (
+          select rownum as rnum, question_id, question_title, users_user_id, products_product_id, question_date, question_answer
+          from (
+             select question_id, question_title, users_user_id, products_product_id, question_date, question_answer
+             from questions
+             order by question_id desc
+          )
+          where rownum &lt;= #{endRowNo}
+      ) 
+      where rnum &gt;= #{startRowNo}
+   </select>
+   
+   <select id="count" resultType="int">
+      select count(*) from questions
+   </select>
+   
+   <select id="selectById" parameterType="int" resultType="question">
+      select question_id, question_title, question_content,
+      		 question_date, users_user_id, products_product_id, product_title, question_answer
+      from questions, products
+      where question_id=#{question_id} and questions.products_product_id=products.product_id
+   </select>
+   
+   <update id="update" parameterType="question">
+      update questions
+      set question_answer=#{question_answer, jdbcType=VARCHAR} 
+      where question_id=#{question_id}
+   </update>
+   
+   <delete id="deleteById" parameterType="int">
+      delete from questions where question_id=#{question_id}
+   </delete>
+</mapper>
