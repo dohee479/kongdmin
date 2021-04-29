@@ -1,0 +1,57 @@
+.calendar{
+  table-layout: fixed;
+}
+.calendar th{
+  width: 150px;
+  background-color:#edf2ff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar td{
+  height: 120px;
+  cursor: pointer;
+}
+.calendarTop{
+  position: relative;
+  left:30%;
+  margin-top: 30px;
+}
+.calendarTitle{
+  font-size: 1.8em;
+  font-weight: bold;
+  margin:0 20px;
+}
+.monthTotalPrice{
+
+  font-size: 1.5em;
+  font-weight: bold;
+  margin:0 150px;
+}
+.order_info{
+  width: 400px;
+  margin-left: 20px;
+  border: solid lightgrey;
+  border-width: 0.1px;
+  background-color:#edf2ff;
+}
+.order_info .date_title{
+  font-size: 30px;
+  font-weight: bold;
+  margin:15px 0px;
+}
+
+.order_info table th{
+  width: 150px;
+  text-align: center;
+  font-weight: bold;
+}
+.order_info table td{
+  text-align: center;
+  font-size: 15px;
+}
+.order_info > div{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+}

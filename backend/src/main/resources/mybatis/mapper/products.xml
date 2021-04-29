@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.ProductsDao">
+	<select id="selectByCountry"  parameterType="string" resultType="product" >
+		select product_title,product_taste,product_price,product_sale_count
+		from products
+		where product_country=#{product_country}
+		order by product_sale_count desc
+	</select>
+	
+	<select id="selectByTaste"  parameterType="string" resultType="product" >
+		select product_title,product_country,product_price,product_sale_count
+		from products
+		where product_taste=#{product_taste}
+		order by product_sale_count desc
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*)
+		from products
+	</select>
+</mapper>

@@ -13,5 +13,6 @@ angular.module("app")
     .when("/", {templateUrl: "views/user/login.html"})
     .when("/user/login", {templateUrl: "views/user/login.html"})
     .when("/home", {templateUrl: "views/home/home.html",controller:"homeController"})
+    .when("/home/calendar", {templateUrl: "views/home/calendar.html",controller:"calendarController"})
     .otherwise({redirectTo: "/"});
   });

@@ -23,5 +23,8 @@ public interface OrdersDao {
 	public List<MonthlyData> selectMonthCount();
 	public List<OrderCount> selectCountryCount();
 	public List<OrderCount> selectTasteCount();
+	public int selectOrderCount();
+	public List<MonthlyData> selectDatePrice(String order_month);
+	public List<Order> selectByDate(String order_date);
 }
 

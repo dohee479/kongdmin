@@ -49,4 +49,13 @@ public class OrdersService {
 	public String getMainProduct(int order_id) {
 		return ordersDao.selectMainProductByOrderId(order_id);
 	}
+	public int getOrderCount() {
+		return ordersDao.selectOrderCount();
+	}
+	public List<MonthlyData> getDatePrice(String order_month){
+		return ordersDao.selectDatePrice(order_month);
+	}
+	public List<Order> getOrderByDate(String order_date){
+		return ordersDao.selectByDate(order_date);
+	}
 }

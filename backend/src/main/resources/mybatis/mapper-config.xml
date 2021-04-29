@@ -4,6 +4,7 @@
    <typeAliases>
       <typeAlias alias="pager" type="com.mycompany.backend.dto.Pager" />
       <typeAlias alias="order" type="com.mycompany.backend.dto.Order"/>
+      <typeAlias alias="product" type="com.mycompany.backend.dto.Product"/>
       <typeAlias alias="orderProduct" type="com.mycompany.backend.dto.OrderProduct"/>
       <typeAlias alias="monthlydata" type="com.mycompany.backend.dto.MonthlyData" />
       <typeAlias alias="ordercount" type="com.mycompany.backend.dto.OrderCount" />

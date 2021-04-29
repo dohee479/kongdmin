@@ -14,7 +14,6 @@ angular.module("app")
 
     $scope.search = {};
     $scope.getList = (pageNo, state) => {
-      
       $scope.sel = 
         {s7: false,
          s1: false,

@@ -1,0 +1,31 @@
+.full_chart{
+  position: relative;
+  height: 420px;
+  margin: 30px 35px;
+}
+.half_chart{
+  position: relative;
+  height: 420px;
+  width: 48%;
+  margin-left: 20px;
+}
+.half_text{
+  position: relative;
+  width: 48%;
+  margin-left: 20px;
+  background-color: white;
+}
+.chartbox{
+  margin: 30px 15px;
+
+}
+.cardStyle{
+  width: 30%;
+  margin: 30px 35px;
+}
+.card_text{
+  margin-left: auto;
+  text-align: right;
+  margin-right: 30px;
+}
+  

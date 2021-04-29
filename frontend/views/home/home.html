@@ -1,10 +1,83 @@
 
 <div>
-  <div id="chartContainer" style="position: relative; height: 420px;"></div>
-    <div class="row row-cols-2 mt-5">
-      <div id="chartContainer2" style="position: relative; height: 420px;"></div>
-      <div id="chartContainer3" style="position: relative; height: 420px;"></div>
+  <div class="d-flex">
+    <div class="card cardStyle" >
+      <div class="card-body">
+        <div class="d-flex">
+          <img id="img1" class="ml-4" height="60px" src="resources/img/member.png"/>
+          <div class="text-secondary card_text">회원 수 <div class="font-weight-bold text-body mt-2" style="font-size:30px;">명</div></div>
+        </div>
+        <hr/>
+      </div>
     </div>
-    <div id="chartContainer4" style="position: realtive; height: 420px;"></div>
+    <div class="card cardStyle" >
+      <div class="card-body">
+        <div class="d-flex">
+          <img id="img1" class="ml-4" height="60px" src="resources/img/product.png"/>
+          <div class="text-secondary card_text">등록된 상품 수 <div class="font-weight-bold text-body mt-2" style="font-size:30px;">{{totalProductCount}}개</div></div>
+        </div>
+        
+        <hr/>
+      </div>
+    </div>
+    <div class="card cardStyle" >
+      <div class="card-body">
+        <div class="d-flex">
+          <img id="img1" class="ml-4" height="60px" src="resources/img/order.png"/>
+          <div class="text-secondary card_text">오늘의 주문 수 <div class="font-weight-bold text-body mt-2" style="font-size:30px;">{{totalOrderCount}}개</div></div>
+        </div>
 
+        <hr/>
+      </div>
+    </div>
+</div>
+  
+  <div id="chartContainer"  class="full_chart border"></div>
+  <div class="row chartbox" >
+    <div id="chartContainer2" class="half_chart border"></div>
+    <div id="chartContainer3" class="half_chart border"></div>
+  </div>
+  <div class="row chartbox" >
+    <div  class="half_text border" ng-show="country||taste">
+      <div class="mb-2 mt-2 text-center justify-content-md-center font-weight-bold">Country : {{country}}</div>
+      <table class="table mb-5">
+        <thead class="bg-dark text-white">
+          <th>상품이름</th>
+          <th>맛과 향</th>
+          <th>가격</th>
+          <th>판매 수</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="product in products">
+            <td class="font-weight-bold" ng-if="$first"><img height="18px" class="mr-1" src="resources/img/good.png"/>{{product.product_title}}</td>
+            <td ng-if="!$first"> {{product.product_title}}</td>
+            <td>{{product.product_taste}}</td>
+            <td>{{product.product_price}}</td>
+            <td>{{product.product_sale_count}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+    <div  class="half_text border" ng-show="taste||country">
+      <div class="mb-2 mt-2 text-center justify-content-md-center font-weight-bold">Taste : {{taste}}</div>
+      <table class="table mb-5">
+        <thead class="bg-dark text-white">
+          <th>상품이름</th>
+          <th>나라</th>
+          <th>가격</th>
+          <th>판매 수</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="product in products2">
+            <td class="font-weight-bold" ng-if="$first"><img height="18px" class="mr-1" src="resources/img/good.png"/>{{product.product_title}}</td>
+            <td ng-if="!$first"> {{product.product_title}}</td>
+            <td>{{product.product_country}}</td>
+            <td>{{product.product_price}}</td>
+            <td>{{product.product_sale_count}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+  </div>
+    <div id="chartContainer4" class="full_chart border"></div>
 </div>
