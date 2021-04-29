@@ -48,15 +48,24 @@
 		      		,order_account
 		      		,order_total_price
              from orders
+             
              <if test="state == 7">
-             	<if test="search_user_id == null">where order_state != 0 </if>
-             	<if test="search_user_id != null">where order_state != 0 and users_user_id = #{search_user_id}</if>
+             	where order_state != 0
              </if>
              <if test="state != 7">
-             	<if test="search_user_id == null">where order_state != 0 and order_state = #{state}</if>
-             	<if test="search_user_id != null">where order_state != 0 and order_state = #{state} and users_user_id = #{search_user_id}</if>
+             	where order_state = #{state}
              </if>
-             order by order_id desc
+             
+             <if test="search_user_id != 'undefined'">
+             and users_user_id = #{search_user_id}
+             </if>
+             
+             and order_total_price &gt;= #{fromPrice} and order_total_price &lt;= #{toPrice}
+             and TO_CHAR(order_date, 'yyyyMMdd') &gt;= #{fromDate} and TO_CHAR(order_date, 'yyyyMMdd') &lt;= #{toDate}
+             
+             <if test="sortDsc=='true'">
+             order by order_total_price DESC
+             </if>
           )
           where rownum &lt;= #{pager.endRowNo}
       ) 
@@ -67,19 +76,25 @@
       select count(*) 
       from orders 
       <if test="state == 7">
-      	<if test="search_user_id == null">where order_state != 0 </if>
-        <if test="search_user_id != null">where order_state != 0 and users_user_id = #{search_user_id}</if>
+         where order_state != 0
       </if>
       <if test="state != 7">
-        <if test="search_user_id == null">where order_state != 0 and order_state = #{state}</if>
-        <if test="search_user_id != null">where order_state != 0 and order_state = #{state} and users_user_id = #{search_user_id}</if>
+         where order_state = #{state}
       </if>
+      <if test="search_user_id != 'undefined'">
+         and users_user_id = #{search_user_id}
+      </if>
+      and order_total_price &gt;= #{fromPrice} and order_total_price &lt;= #{toPrice}
+      and TO_CHAR(order_date, 'yyyyMMdd') &gt;= #{fromDate} and TO_CHAR(order_date, 'yyyyMMdd') &lt;= #{toDate}
    </select>
    
    <select id="selectStateCountByState" resultType="int">
    		select count(*)
    		from orders
-   		where order_state = #{state}
+   		<if test="search_user_id == 'undefined'">where order_state = #{state}</if>
+   		<if test="search_user_id != 'undefined'">where order_state = #{state} and users_user_id = #{search_user_id}</if>
+   		and order_total_price &gt;= #{fromPrice} and order_total_price &lt;= #{toPrice}
+   		and TO_CHAR(order_date, 'yyyyMMdd') &gt;= #{fromDate} and TO_CHAR(order_date, 'yyyyMMdd') &lt;= #{toDate}
    </select>
 
    <select id="selectByOrderId" parameterType="int" resultType="order">
@@ -108,7 +123,6 @@
 		where tmp.products_product_id = products.product_id and rownum=1
    </select>
 	
-	
 	<select id="selectMonthPrice" resultType="monthlydata">
 		select b.order_date as month,nvl(a.order_total_price,0) as month_total_price
 		from
@@ -125,7 +139,6 @@
 		 ON a.order_date=b.order_date
 		 order by b.order_date
 	</select>
-	
 	
 	<select id="selectMonthCount" resultType="monthlydata">
 		select b.order_date as month ,nvl(a.order_count,0) as month_count
@@ -175,4 +188,29 @@
 	        )
 	    group by product_taste
 	</select>
+	
+	<update id="changeState">
+		update orders set 
+        order_state = #{changeState}
+        where order_id=#{order_id}
+	</update>
+	
+	<select id="getProductCount" resultType="int">
+		select count(*)
+		from order_products
+		where orders_order_id = #{order_id}
+	</select>
+	
+	<update id="updateOrder" parameterType="order">
+		update orders set
+			order_receiver = #{order_receiver},
+			order_tel = #{order_tel},
+			order_zipcode = #{order_zipcode},
+			order_address = #{order_address},
+			order_detail_address = #{order_detail_address},
+			<if test="order_msg != null" >
+			order_msg = #{order_msg}
+			</if>
+		where order_id = #{order_id}
+	</update>
 </mapper>

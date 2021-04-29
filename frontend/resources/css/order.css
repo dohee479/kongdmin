@@ -1,0 +1,220 @@
+/* 주문상태 선택을 위함*/
+
+.state7, .state1, .state5, .state9,
+.state2, .state3
+{
+  background-color: #EFEFEF;
+}
+
+.selectState{
+  width: 10rem; 
+  height: 10rem;
+}
+
+.satateIcon{
+  font-size:50px; 
+  color:#A9A9A9;
+}
+
+.compl{
+  color:#3Cb371;
+}
+
+.cancl{
+  color:#CD0000;
+}
+
+/* 조건선택을 위함 */
+.conditionTable{
+  width: 1000px;
+}
+
+.conditionTable td{
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.conditionId{
+  width:605px;
+}
+
+.conditionTable span{
+  vertical-align: middle;
+}
+
+.conditionPrice{
+  width:250px;
+}
+
+.conditionDate{
+  width:250px;
+}
+
+.sortDsc{
+  font-size: 12px;
+  border: 1px solid #808080;
+  padding: 10px 0px 10px 20px;
+}
+
+.orderList{
+  width: 1050px;
+}
+
+.listTitle_n{
+  width: 100px;
+}
+
+.listTitle_r{
+  width: 150px;
+}
+
+.listTitle_i{
+  width: 360px;
+}
+
+.listTitle_p{
+  width: 150px;
+}
+
+.listTitle_d{
+  width: 150px;
+}
+
+.listTitle_s{
+  width: 150px;
+}
+
+.listItem{
+  height: 4em; 
+  vertical-align: middle;
+}
+
+.listItem td{
+  vertical-align: middle;
+}
+
+.orderdetailTitle{
+  margin-right: auto;
+  font-weight: 700;
+}
+
+.detailStateTitle{
+  padding: 13px;
+}
+
+.changeStateDiv{
+  border : 1px solid #A9A9A9; 
+  border-radius: 2px; 
+  font-size: 13px;
+  padding: 15px;
+}
+
+.changeStateDiv2{
+  font-size: 13px; 
+  padding: 4px; 
+  margin: 1px;
+  font-size:13px;
+}
+
+.orderProductTitle{
+  margin-right: auto;
+}
+
+.orderProductPrice{
+  margin-right: auto;
+}
+
+.oPT{
+  width: 1050px;
+}
+
+.oPTT1{
+  width: 100px;
+}
+.oPTT2{
+  width: 300px;
+}
+.oPTT3{
+  width: 100px;
+}
+.oPTT4{
+  width: 150px;
+}
+.oPTT5{
+  width: 100px;
+}
+.oPTT6{
+  width: 150px;
+}
+
+.oPTC{
+  height: 4em; 
+  vertical-align: middle;
+}
+
+.oPTC td{
+  vertical-align: middle;
+}
+
+.oPTC .oPTCT{
+  width: 300px;
+}
+
+.update .error{
+  color: #FF0000;
+  font-size: 0.8em;
+}
+
+.orderInfo{
+  width: 1050px; 
+  justify-content : space-between;
+}
+
+.orderInfo tr{
+  height: 4em;
+}
+
+.orderInfo th, .orderInfo td{
+  vertical-align: middle;
+}
+
+.uOM {
+  font-size: 13px; 
+  color: #036635;
+}
+
+.dT{
+  width: 500px;
+}
+
+.dT tr{
+  height: 4em;
+}
+
+.dT th, .dT td{
+  vertical-align: middle;
+}
+
+.dT .address{
+  font-size: 13px;
+}
+
+.uDI{
+  justify-content: center;
+  text-align: center;
+}
+
+.uDIB{
+  width: 110px; 
+  border : 1px solid #FFFFFF; 
+  border-radius: 2px; 
+  font-size: 13px; 
+  padding: 15px;
+}
+
+.bLB{
+  border : 1px solid #A9A9A9; 
+  border-radius: 2px; 
+  font-size: 13px; 
+  padding: 15px;
+}

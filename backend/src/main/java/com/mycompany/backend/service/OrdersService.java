@@ -1,5 +1,8 @@
 package com.mycompany.backend.service;
 
+
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +33,33 @@ public class OrdersService {
 	public List<OrderCount> getTasteCountList(){
 		return ordersDao.selectTasteCount();
 	}
-	public int getCount(int state, String search_user_id) {
-		return ordersDao.count(state, search_user_id);
+	public int getCount(int state, 
+						String search_user_id, 
+						int fromPrice, 
+						int toPrice,
+						String fromDate,
+						String toDate) {
+		return ordersDao.count(state, search_user_id, fromPrice, toPrice, fromDate, toDate);
 	}
 	
-	public List<Order> getList(Pager pager, int state, String search_user_id) {
-	    return ordersDao.selectByPage(pager, state, search_user_id);
+	public List<Order> getList(Pager pager, 
+							   int state, 
+							   String search_user_id, 
+							   int fromPrice, 
+							   int toPrice,
+							   String fromDate,
+							   String toDate,
+							   String sortDsc) {
+	    return ordersDao.selectByPage(pager, state, search_user_id, fromPrice, toPrice, fromDate, toDate, sortDsc);
 	}
 	
-	public int getStateCount(int state) {
-		return ordersDao.selectStateCountByState(state);
+	public int getStateCount(int state, 
+							 String search_user_id, 
+							 int fromPrice, 
+							 int toPrice, 
+							 String fromDate, 
+							 String toDate) {
+		return ordersDao.selectStateCountByState(state, search_user_id, fromPrice, toPrice, fromDate, toDate);
 	}
 	
 	public Order getOrder(int order_id) {
@@ -48,5 +68,17 @@ public class OrdersService {
 	
 	public String getMainProduct(int order_id) {
 		return ordersDao.selectMainProductByOrderId(order_id);
+	}
+	
+	public void changeState(int order_id, int changeState) {
+		ordersDao.changeState(order_id, changeState);
+	}
+	
+	public int getProductCount(int order_id) {
+		return ordersDao.getProductCount(order_id);
+	}
+	
+	public void updateOrder(Order order) {
+		ordersDao.updateOrder(order);
 	}
 }
