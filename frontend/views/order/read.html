@@ -1,0 +1,211 @@
+<div class="d-flex flex-column align-items-center" >
+<div class="flex flex-column mt-5">
+  
+<span class="h5 mb-3 orderdetailTitle">
+  '{{order.users_user_id}}' 의 {{order.order_date | date:"yyyy년 MM월 dd일" }} 주문
+</span>
+  <div class="text-center mt-3 h5 font-weight-bold" ng-switch on="order.order_state">
+    <div class="d-flex">
+      <div class="d-flex" ng-switch-when="1">
+      <i class="far fa-check-circle mr-1 satateIcon"></i>
+      <div class="detailStateTitle">주문완료</div>
+    </div>
+    <div class="d-flex" ng-switch-when="9">
+      <i class="fas fa-times mr-1 satateIcon cancl"></i>
+      <div class="detailStateTitle">주문취소</div>
+    </div> 
+    <div class="d-flex" ng-switch-when="2">
+      <i class="fas fa-money-check mr-1 satateIcon"></i>
+      <div class="detailStateTitle">결제완료</div>
+    </div> 
+    <div class="d-flex" ng-switch-when="3">
+      <i class="fas fa-truck mr-1 satateIcon"></i>
+      <div class="detailStateTitle">배송중</div>
+    </div> 
+    <div class="d-flex" ng-switch-when="5">
+      <i class="fas fa-check-circle mr-1 satateIcon compl"></i>
+      <div class="detailStateTitle">구매확정</div>
+    </div> 
+  
+    <div class="flex flex-column">
+      <div class="d-flex">
+    <div ng-click="changeState(order.order_id,3)" class="mr-2 ml-3 changeStateDiv">
+      배송처리
+    </div>
+    <div ng-click="changeState(order.order_id,9)" class="changeStateDiv">
+      취소처리
+    </div>
+    </div>
+    <div class="d-flex ml-2 mt-2">
+      <div class="changeStateDiv2" ng-click="changeState(order.order_id,1)">주문완료</div>
+      <div class="changeStateDiv2" ng-click="changeState(order.order_id,2)">결제완료</div>
+      <div class="changeStateDiv2" ng-click="changeState(order.order_id,5)">구매확정</div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="flex flex-column mt-3">
+<span class="h5 mb-3 font-weight-bold mb-2 orderProductTitle">주문상품</span><br>
+<span class="h6 mb-3 font-weight-bold orderProductPrice">총 주문가격 : {{order.order_total_price | number}} 원</span>
+
+<table class="table text-center table-hover mt-3 oPT">
+  <tr class="bg-dark text-white">
+      <th class ="oPTT1">상품번호</th>
+      <th class ="oPTT2">상품이름</th>
+      <th class ="oPTT3">선택용량</th>
+      <th class ="oPTT4">선택분쇄</th>
+      <th class ="oPTT5">갯수</th>
+      <th class ="oPTT6">상품금액</th>
+  </tr>
+  <tr class="oPTC" ng-repeat="orderProduct in orderProducts">
+      <td>{{orderProduct.products_product_id}}</td>
+      <td class="oPTCT">{{orderProduct.product_title}}</td>
+      <td>{{orderProduct.order_product_volume}}g</td>
+      <td ng-switch="{{orderProduct.order_product_grind}}">
+        <div ng-switch-when="1">홀빈</div>
+        <div ng-switch-when="2">프렌치프레스</div> 
+        <div ng-switch-when="3">핸드드립</div> 
+        <div ng-switch-when="4">더치용</div> 
+      </td>
+      <td>{{orderProduct.order_product_count}}</td>
+      <td>{{orderProduct.order_product_price  | number}}</td>
+  </tr>
+</table>
+</div>
+
+<div class="d-flex mt-5 orderInfo">
+  <div>
+  <span class="h5 mb-3 font-weight-bold">주문상세</span>
+  <table class="table mt-3">
+    <tbody>
+      <tr>
+        <th class="font-weight-bold" scope="row">주문번호</th>
+        <td>{{order.order_id}}</td>
+      </tr>
+      <tr>
+        <th class="font-weight-bold" scope="row">주문자</th>
+        <td>{{order.users_user_id}}</td>
+      </tr>
+      <tr>
+        <th class="font-weight-bold" scope="row">입금정보</th>
+        <td>{{order.order_account_name}} [{{order.order_account}}]</td>
+      </tr>
+      <tr>
+        <th class="font-weight-bold" scope="row">주문날짜</th>
+        <td >{{order.order_date | date:"yyyy.MM.dd" }}</td>
+      </tr>
+      <tr>
+        <th class="font-weight-bold" scope="row">주문가격</th>
+        <td>{{order.order_total_price | number}}</td>
+      </tr>
+      <tr>
+        <th class="font-weight-bold" scope="row">주문상태</th>
+        <td>
+          <div ng-switch="order.order_state"> 
+            <div ng-switch-when="1">주문완료</div>
+            <div ng-switch-when="9">주문취소</div> 
+            <div ng-switch-when="2">결제완료</div> 
+            <div ng-switch-when="3">배송중</div> 
+            <div ng-switch-when="5">구매확정</div> 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <form class="update" name="update" novalidate ng-submit="updateOrder(order)">
+  <span class="h5 mb-3 font-weight-bold">배송정보</span>
+  <span class="ml-5 uOM" ng-show="isModifyed">배송정보가 수정되었습니다.</span>
+  <table class="table mt-3 dT">
+    <tbody>
+  <tr>
+    <th class="font-weight-bold" scope="row">받는사람 이름</th>
+    <td>
+      <!-- {{order.order_receiver}}  -->
+      <input name="order_receiver" type="text" class="form-control mb-1" 
+      ng-required="true"
+      ng-model="order.order_receiver"/>
+      <span class="error" 
+          ng-show="update.order_receiver.$invalid && update.order_receiver.$dirty && update.order_receiver.$error.required">
+          필수 입력 사항입니다.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <th class="font-weight-bold" scope="row">배송 연락처</th>
+    <td>
+      <!-- {{order.order_tel}} -->
+      <input name="order_tel" type="text" class="form-control mb-1" 
+      ng-required="true"
+      ng-pattern="/^[0-9]/"
+      ng-model="order.order_tel"/>
+      <span class="error" 
+        ng-show="update.order_tel.$invalid && update.order_tel.$dirty && update.order_tel.$error.required">
+      필수 입력 사항입니다.
+      </span>
+      <span span class="error" 
+        ng-show="update.order_tel.$invalid && update.order_tel.$dirty && update.order_tel.$error.pattern">올바른 전화번호를 입력하세요.</span>
+    </td>
+  </tr>
+  <tr>
+    <th class="font-weight-bold" scope="row">배송지 주소</th>
+    <td>
+      <!-- [{{order.order_zipcode}}] {{order.order_address}} {{order.order_detail_address}}  -->
+      <span class="font-weight-bold mt-2 address">우편번호</span>
+      <input name="order_zipcode" type="text" class="form-control mt-1 mb-2" 
+      ng-required="true"
+      ng-minlength="5"
+      ng-maxlength="5"
+      ng-pattern="/^[0-9]/"
+      ng-model="order.order_zipcode"/>
+      <span class="error" 
+        ng-show="update.order_zipcode.$invalid && update.order_zipcode.$dirty && update.order_zipcode.$error.required">
+      필수 입력 사항입니다. <br>
+      </span>
+      <span span class="error mb-1" 
+      ng-show="update.order_zipcode.$invalid && update.order_zipcode.$dirty && update.order_zipcode.$error.pattern">올바른 우편번호를 입력하세요.<br>
+      </span>
+      <span span class="error mb-2" 
+      ng-show="update.order_zipcode.$invalid && update.order_zipcode.$dirty && ( update.order_zipcode.$error.minlength || update.order_zipcode.$error.maxlength)">우편번호 5자를 입력하세요.<br>
+      </span>
+
+      <span class="font-weight-bold mt-2 address">주소</span>
+      <input name="order_address" type="text" class="form-control mt-1 mb-2" 
+      ng-required="true"
+      ng-model="order.order_address"/>
+      <span class="error" 
+      ng-show="update.order_address.$invalid && update.order_address.$dirty && update.order_address.$error.required">
+      필수 입력 사항입니다. <br>
+      </span>
+      <span class="font-weight-bold mt-2 address">상세주소</span>
+      <input name="order_detail_address" type="text" class="form-control mt-1 mb-2" 
+      ng-required="true"
+      ng-model="order.order_detail_address"/>
+      <span class="error" 
+      ng-show="update.order_detail_address.$invalid && update.order_detail_address.$dirty && update.order_detail_address.$error.required">
+      필수 입력 사항입니다. <br>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <th class="font-weight-bold" scope="row">배송지 메세지</th>
+    <td>
+      <!-- {{order.order_msg}} -->
+      <input type="text" class="form-control" ng-model="order.order_msg"/>
+    </td>
+  </tr>
+</tbody>
+</table>
+<div class="d-flex uDI">
+  <button class="mr-2 ml-3 font-weight-bold uDIB">
+    배송정보수정
+  </button>
+</div>
+</form>
+</div>
+</div>
+<a ng-click="getList(1,7)"><div class="font-weight-bold mb-5 mt-5 bLB">주문목록</div></a>
+</div>

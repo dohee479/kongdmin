@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.OrderProductDao">
+
+<select id="selectAll" parameterType="int" resultType="orderProduct">
+		select order_product_id, 
+					order_product_volume,
+					order_product_grind,
+					order_product_count,
+					products_product_id,
+					orders_order_id,
+					order_product_price,
+					product_title,
+					order_state
+					
+		from order_products,products,orders
+		where orders_order_id = ${orders_order_id} AND order_products.products_product_id=products.product_id AND order_products.orders_order_id=orders.order_id
+		order by orders_order_id
+	</select>
+</mapper>
