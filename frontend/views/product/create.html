@@ -1,0 +1,60 @@
+<style>
+  @import url("../resources/css/product/create.css");
+</style>
+
+<div class="container">
+  <form name="productForm" class="d-flex flex-column justify-content-center align-items-center" novalidate ng-submit="createProduct(product)">
+    <div class="product-create-title">상품 등록</div>
+    <div class="product-data">
+      <div class="form__group field">
+        <input type="text" name="title" placeholder="상품명" ng-model="product.title" class="form__field" autocomplete="off" ng-required="true"/>
+        <label class="form__label">상품명</label>
+        <div id="error" class="error" ng-show="productForm.title.$invalid && productForm.title.$dirty">
+          <span ng-show="productForm.title.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <div>
+        <label class="mb-4">Country</label>
+        <select name="country" ng-model="product.country" ng-required="true">
+          <option value="">나라 선택</option>
+          <option ng-repeat="country in countries">{{country}}</option>
+        </select>
+        <div id="error" class="error" ng-show="productForm.country.$invalid && productForm.country.$dirty">
+          <span ng-show="productForm.country.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <div>
+        <label class="mb-4">Flavor</label>
+        <select name="flavor" ng-model="product.flavor" ng-required="true">
+          <option value="">맛/향 선택</option>
+          <option ng-repeat="flavor in flavors">{{flavor}}</option>
+        </select>
+        <div id="error" class="error" ng-show="productForm.flavor.$invalid && productForm.flavor.$dirty">
+          <span ng-show="productForm.flavor.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <div class="form__group field">
+        <input type="text" name="price" placeholder="상품가격" ng-model="product.price" class="form__field" autocomplete="off" ng-required="true"/>
+        <label class="form__label">상품가격</label>
+        <div id="error" class="error" ng-show="productForm.price.$invalid && productForm.price.$dirty">
+          <span ng-show="productForm.price.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <div>
+        <label class="mb-4 d-block">Proudct Image</label>
+        <input id="product_attach" name="attach" type="file" ng-required="true"/>
+        <div id="error" class="error" ng-show="productForm.attach.$invalid && productForm.attach.$dirty">
+          <span ng-show="productForm.attach.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <div>
+        <label class="mb-4 d-block">Proudct Detail Image</label>
+        <input id="product_detail_attach" name="detail_attach" type="file" ng-required="true"/>
+        <div id="error" class="error" ng-show="productForm.detail_attach.$invalid && productForm.detail_attach.$dirty">
+          <span ng-show="productForm.detail_attach.$error.required">필수 입력 사항입니다.</span>
+        </div>
+      </div>
+      <button type="submit" class="create-btn">등록</button>
+    </div>
+  </form>
+</div>

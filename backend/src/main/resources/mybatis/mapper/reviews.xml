@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.ReviewsDao">
+	<resultMap type="product" id="product">
+		
+	</resultMap>
+	
+	<select id="count" parameterType="HashMap" resultType="int">
+		select count(*) 
+		from (
+		   	select *
+				from reviews R, products P
+				where R.products_product_id = P.product_id
+				<if test="sort =='null'">order by review_id desc</if>
+				<if test="sort == 'asc'"> order by review_grade asc</if>
+				<if test="sort == 'desc'"> order by review_grade desc</if> 
+		)
+	   <if test="keyword == '작성자'">
+			   where users_user_id like '%' || #{kcontent} || '%'
+	   </if>
+	   <if test="keyword == '내용'">
+			where review_content like '%' || #{kcontent} || '%'	
+	   </if>
+	   <if test="keyword == '상품명'">
+			where product_title like '%' || #{kcontent} || '%'	
+	   </if> 
+	</select>
+	
+	<select id="getReviewList" parameterType="HashMap" resultType="review">
+		select rnum, review_id, review_title, review_content, review_grade,
+			   review_attachoname, review_attachsname, review_attachtype,
+			   review_date, users_user_id, order_product_id, products_product_id, product_title
+		from(
+			select rownum as rnum, review_id, review_title, review_content, review_grade,
+			   review_attachoname, review_attachsname, review_attachtype,
+			   review_date, users_user_id, order_product_id, products_product_id, product_title
+			   from (
+			   		select review_id, review_title, review_content, review_grade,
+			   			   review_attachoname, review_attachsname, review_attachtype,
+			   			   review_date, users_user_id, order_product_id, products_product_id, product_title
+			   			   from (
+			   			   	select *
+								from reviews R, products P
+								where R.products_product_id = P.product_id
+								<if test="sort =='null'">order by review_id desc</if>
+								<if test="sort == 'asc'"> order by review_grade asc</if>
+								<if test="sort == 'desc'"> order by review_grade desc</if>  
+			   			   )
+			   			   <if test="keyword == '작성자'">
+			   			   where users_user_id like '%' || #{kcontent} || '%'
+			   			   </if>
+			   			   <if test="keyword == '내용'">
+							where review_content like '%' || #{kcontent} || '%'	
+			   			   </if>
+   			   			   <if test="keyword == '상품명'">
+							where product_title like '%' || #{kcontent} || '%'	
+			   			   </if>
+			   			   
+			   )
+			   where rownum &lt;= #{endRowNo}
+		)
+		where rnum &gt;= #{startRowNo}
+
+	</select>
+	
+	<select id="getReview" parameterType="int" resultType="review">
+		select * from reviews where review_id = #{review_id}
+	</select>
+	
+	<delete id="delete">
+		delete from reviews
+		where review_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item}
+		</foreach>
+	</delete>
+</mapper>

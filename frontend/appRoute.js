@@ -11,5 +11,12 @@ angular.module("app")
     $routeProvider
     .when("/", {templateUrl: "views/home/home.html"})
     .when("/user/login", {templateUrl: "views/user/login.html"})
+    
+    // product
+    .when("/product", {templateUrl: "views/product/list.html", controller: "productsController"})
+    .when("/product/create", {templateUrl: "views/product/create.html", controller: "productsController"})
+    
+    // review
+    .when("/review", {templateUrl: "views/review/list.html", controller: "reviewsController"})
     .otherwise({redirectTo: "/"});
   });
