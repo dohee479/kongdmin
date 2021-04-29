@@ -18,16 +18,17 @@
           from users
           where rownum &lt;= #{endRowNo} and user_authority='ROLE_USER' and user_id like '%${keyword}%'
       ) 
-      where rnum &gt;= #{startRowNo}
+      where rnum &gt;= #{startRowNo} 
    </select>
    
    <select id="count" resultType="int">
-      select count(*) from users
+      select count(*) from users 
+      where user_authority='ROLE_USER'
    </select>
    
    <select id="countSearch" parameterType="string" resultType="int">
       select count(*) from users
-      where user_id like '%${keyword}%'
+      where user_id like '%${keyword}%' and user_authority='ROLE_USER'
    </select>
    
    <select id="userAuthority" parameterType="string" resultType="string">
