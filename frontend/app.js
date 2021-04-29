@@ -57,16 +57,17 @@ angular.module("app", ["ngRoute"])
 
           $rootScope.uid=response.data.uid;
           $rootScope.authToken=response.data.authToken;
-
-
           sessionStorage.setItem("uid",response.data.uid);
           console.log(response.data);
           sessionStorage.setItem("authToken",response.data.authToken);
-
-          $location.url("/");
+          
+          if($rootScope.uid=='0'){
+            $window.alert("관리자만 로그인이 가능합니다.");
+            $scope.logout();
+          }
+          $location.url("/home");
         })
         .catch((response)=>{
-          console.log(response.data.message);
           if(response.data.message=="Access Denied"){ // 둘중 하나라도 입력했을때
             $window.alert("아이디 또는 비밀번호를 확인해주세요.");
           }
@@ -74,17 +75,16 @@ angular.module("app", ["ngRoute"])
             $window.alert("데이터를 입력해주세요.");
           }
         });
+    }
+
+    $scope.reloadable = (path) => {
+      if($location.url().includes(path)){
+          $route.reload();
+          
+      }
     };
   })
   .config(function() {
   
  
   })
-  .controller("mainController",function($scope,$location,$route) {
-    $scope.reloadable = (path) => {
-      if($location.url().includes(path)){
-          $route.reload();
-          
-      }
-  }
-  });

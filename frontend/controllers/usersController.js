@@ -16,7 +16,8 @@ angular.module("app")
     };
 
     $scope.getList = (pageNo) => {
-      usersService.list(pageNo)
+      console.log("scope.keyword 값 : "+$scope.keyword);
+      usersService.list(pageNo,$scope.keyword)
         .then((response) => {
           $scope.pager = response.data.pager;
           $scope.users = response.data.users;
@@ -24,8 +25,17 @@ angular.module("app")
           for(var i=$scope.pager.startPageNo; i<=$scope.pager.endPageNo; i++) {
             $scope.pageRange.push(i);
           }
+          console.log("Response-Data-Pager: "+response.data.pager);
+          console.log("response: "+response);
+          console.log("pageRange "+$scope.pageRange);
           $scope.view = "list";
         });
+    };
+
+    $scope.search=(keyword)=>{
+      console.log(keyword);
+      $scope.keyword=keyword;
+      $scope.getList(1);
     };
 
     $scope.read = (user_id) => {
@@ -36,26 +46,6 @@ angular.module("app")
         });
     };
 
-    /*$scope.createBoard = (board) => {
-      console.log("asd");
-
-      if(user && board.btitle && board.bcontent) {
-        var formData = new FormData();
-        formData.append("btitle", board.btitle);
-        formData.append("bcontent", board.bcontent);
-        formData.append("bwriter", $rootScope.uid);
-        var battach = $("#battach")[0].files[0];
-        if(battach) {
-          formData.append("battach", battach);
-        }
-        userService.create(formData)
-          .then((response) => {
-            $scope.getList(1);
-            $scope.view = "list";
-          });
-      }
-    };
-      */
     $scope.cancel = () => {
       $scope.getList($scope.pager.pageNo);
       $scope.view = "list";

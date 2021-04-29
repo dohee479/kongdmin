@@ -1,7 +1,7 @@
   <div class="card-body">
     <div>
       <table class="table table-striped table-bordered">
-          <tr>
+          <tr class="font-weight-bold">
               <th>질문번호</th>
               <th>제목</th>
               <th>일시</th>
@@ -22,7 +22,7 @@
                                ng-show="pager.groupNo>1" 
                                ng-click="getList(pager.startPageNo-1)">이전</button>
                    <button ng-repeat="i in pageRange"
-                              class="btn btn-sm {{(pager.pageNo==i)?'btn-secondary':'btn-outline-secondary'}} {{!$last?'mr-1':''}}" 
+                               class="btn btn-sm {{(pager.pageNo==i)?'btn-secondary':'btn-outline-secondary'}} {{!$last?'mr-1':''}}" 
                                ng-click="getList(i)">{{i}}</button>
                    <button class="btn btn-outline-secondary btn-sm" 
                                ng-show="pager.groupNo < pager.totalGroupNo" 

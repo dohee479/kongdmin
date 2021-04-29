@@ -4,8 +4,10 @@ angular.module("app")
     const BASE_URL = "http://localhost:8080/user";
     //서비스 객체 리턴
     return {
-      list: function(pageNo=1) {
-        const promise = $http.get(BASE_URL, {params:{pageNo}});
+      list: function(pageNo=1,keyword=null) {
+        const promise = $http.get(BASE_URL, {params:{pageNo,keyword}});
+        console.log("pageNo:"+pageNo);
+        console.log("promise:"+promise);
         return promise;
       },
       read: function(user_id) {

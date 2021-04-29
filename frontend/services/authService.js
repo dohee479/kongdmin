@@ -5,10 +5,8 @@ angular.module("app")
     //서비스 객체 리턴
     return {
       login:function(user){
-        console.log(user);
         //const promise=$http.post(BASE_URL+"/login", null, {params:{uid:user.uid, upassword:user.upassword}});
         const promise=$http.post(BASE_URL+"/login", user);
-        console.log(promise);
         return promise;
       }
     }
