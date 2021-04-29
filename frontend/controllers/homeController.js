@@ -1,9 +1,9 @@
 angular.module("app")
   .controller("homeController", function($scope,homeService) {
     //회원 수
-    homeService.orderCount()
+    homeService.memberCount()
       .then((response) =>{
-        $scope.totalOrderCount=response.data;
+        $scope.memberCount=response.data;
       })
     //등록된 상품 수
     homeService.productCount()

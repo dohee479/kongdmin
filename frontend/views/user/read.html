@@ -1,0 +1,51 @@
+<style>
+  .card-body {
+	  line-height: 1.5;
+  }
+</style>
+
+<div class="card-body">
+  <div class="card">
+    <div class="card-header text-light bg-secondary">
+      <span class="font-weight-bold">{{user.user_id}}</span>의 정보
+    </div>
+
+    <div class="card-body">
+      <div>
+        <div class="form-group">
+          <label>이름</label>
+          <input class="form-control" ng-value="user.user_name" readonly/>
+        </div>
+        <div class="form-group">
+          <label>전화번호</label>
+          <input class="form-control" ng-value="user.user_tel" readonly/>
+        </div>
+        <div class="form-group">
+          <label>이메일</label>
+          <input class="form-control" ng-value="user.user_email" readonly/>
+        </div>
+        <div class="form-group">
+          <label>주소</label>
+          <textarea class="form-control" ng-value="user.user_address" readonly></textarea>
+        </div>
+        <div class="form-group">
+          <label>상세주소</label>
+          <textarea class="form-control" ng-value="user.user_detail_address" readonly></textarea>
+        </div>
+        <div class="form-group">
+          <label>총 구매비용</label>
+          <div class="input-group mb-5">
+            <input class="form-control" ng-value="user.total_pay" readonly/>
+            <div class="input-group-append">
+              <span class="input-group-text" id="inputGroup-sizing-default">₩</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-secondary btn-sm" ng-click="getList(pager.pageNo)">목록</button>
+          <button class="btn btn-secondary btn-sm" ng-click="deleteUser(user.user_id)">삭제</button>       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

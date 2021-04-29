@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.UsersDao">
+   <select id="selectByPage" parameterType="pager" resultType="user">
+      select rnum, user_id, user_name, user_tel, user_email
+      from (
+          select rownum as rnum, user_id, user_name, user_tel, user_email
+          from users
+          where rownum &lt;= #{endRowNo} and user_authority='ROLE_USER' 
+      ) 
+      where rnum &gt;= #{startRowNo}
+   </select>
+   
+   <select id="selectBySearch" parameterType="pager" resultType="user">
+      select rnum, user_id, user_name, user_tel, user_email
+      from (
+          select rownum as rnum, user_id, user_name, user_tel, user_email
+          from users
+          where rownum &lt;= #{endRowNo} and user_authority='ROLE_USER' and user_id like '%${keyword}%'
+      ) 
+      where rnum &gt;= #{startRowNo}
+   </select>
+   
+   <select id="count" resultType="int">
+      select count(*) from users
+   </select>
+   
+   <select id="countSearch" parameterType="string" resultType="int">
+      select count(*) from users
+      where user_id like '%${keyword}%'
+   </select>
+   
+   <select id="userAuthority" parameterType="string" resultType="string">
+   		select user_authority
+      	from users
+      	where user_id=#{user_id}
+   </select>
+   
+   <select id="selectById" parameterType="string" resultType="user">
+      select user_id, user_name, user_tel, user_email, user_address, user_detail_address, user_zipcode
+      from users 
+      where user_id=#{user_id}
+   </select>
+   
+   <select id="totalPay" parameterType="string" resultType="Integer">
+   	  select sum(order_total_price)
+   	  from orders
+   	  where users_user_id=#{user_id} and order_state=1
+   </select>
+   
+   <delete id="deleteById" parameterType="string">
+      delete from users where user_id=#{user_id}
+   </delete>
+   
+   <select id="selectMemberCount" resultType="int">
+   	select count(*)
+	from users
+	where user_authority='ROLE_USER'
+   </select>
+   
+</mapper>

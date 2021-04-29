@@ -2,7 +2,7 @@
   <li class="nav-item">
     <a class="nav-link" href="/#!/home" ng-click="reloadable('home')"><i class="fas fa-chart-line"></i><span class="title">대시보드</span></a>
     <a class="nav-link" href="/#!/home/calendar"><i class="far fa-calendar-alt"></i><span class="title">캘린더</span></a>
-    <a class="nav-link" href="/#!/user/login"><i class="fas fa-user-friends"></i><span class="title">회원관리</span></a>
+    <a class="nav-link" href="/#!/user"><i class="fas fa-user-friends"></i><span class="title">회원관리</span></a>
 
     <a data-toggle="collapse" href="" data-target="#products" class="nav-link mainTitle">
       <i class="fas fa-coffee"></i><span class="title">상품관리</span>
@@ -11,10 +11,10 @@
       <a class="nav-link subtitle" href="#">상품조회</a>
       <a class="nav-link subtitle" href="#">상품등록</a>
     </ul>
-
     <a class="nav-link" href="/#!/order/"><i class="fas fa-shopping-cart"></i><span class="title">주문</span></a>
     <a class="nav-link" href=""><i class="fas fa-star"></i><span class="title">리뷰</span></a>
-    <a class="nav-link" href=""><i class="fas fa-question-circle"></i><span class="title">Q&A</span></a>
+    <a class="nav-link" href="/#!/question"><i class="fas fa-question-circle"></i><span class="title">Q&A</span></a>
+    <a class="nav-link" ng-click="logout()"><i class="fas fa-sign-out-alt"></i>관리자 로그아웃</a>
   </li>
 </ul>
 

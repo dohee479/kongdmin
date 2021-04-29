@@ -15,6 +15,7 @@ import com.mycompany.backend.dto.OrderCount;
 import com.mycompany.backend.dto.Product;
 import com.mycompany.backend.service.OrdersService;
 import com.mycompany.backend.service.ProductsService;
+import com.mycompany.backend.service.UsersService;
 
 @RestController
 @RequestMapping("/home")
@@ -25,6 +26,9 @@ public class HomeController {
 	private OrdersService ordersService;
 	@Autowired
 	private ProductsService productsService;
+	@Autowired
+	private UsersService usersService;
+	
 	
 	@GetMapping("/monthprice")
 	public List<MonthlyData> monthList() {
@@ -67,5 +71,9 @@ public class HomeController {
 	@GetMapping("/orderlist")
 	public List<Order> orderByDateList(String order_date){
 		return ordersService.getOrderByDate(order_date);
+	}
+	@GetMapping("/membercount")
+	public int memberCount() {
+		return usersService.getMemberCount();
 	}
 }
