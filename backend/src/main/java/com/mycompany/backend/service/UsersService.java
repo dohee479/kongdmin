@@ -45,4 +45,8 @@ public class UsersService {
    public Integer totalPay(String user_id) {
 	   return usersDao.totalPay(user_id);
    }
+   
+   public int getMemberCount() {
+	   return usersDao.selectMemberCount();
+   }
 }

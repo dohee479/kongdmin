@@ -75,4 +75,22 @@
 		#{item}
 		</foreach>
 	</delete>
+	
+	<select id="selectByCountry"  parameterType="string" resultType="product" >
+		select product_title,product_taste,product_price,product_sale_count
+		from products
+		where product_country=#{product_country}
+		order by product_sale_count desc
+	</select>
+	
+	<select id="selectByTaste"  parameterType="string" resultType="product" >
+		select product_title,product_country,product_price,product_sale_count
+		from products
+		where product_taste=#{product_taste}
+		order by product_sale_count desc
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*)
+		from products
+	</select>
 </mapper>

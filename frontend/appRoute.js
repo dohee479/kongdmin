@@ -22,5 +22,6 @@ angular.module("app")
     .when("/review", {templateUrl: "views/review/list.html", controller: "reviewsController"})
     
     .when("/home", {templateUrl: "views/home/home.html",controller:"homeController"})
+    .when("/home/calendar", {templateUrl: "views/home/calendar.html",controller:"calendarController"})
     .otherwise({redirectTo: "/"});
   });
