@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.backend.dao.ProductsDao">
+	<insert id="create" parameterType="product">
+		<selectKey keyProperty="product_id" resultType="int" order="BEFORE">
+			select seq_product_id.nextval from dual
+		</selectKey>
+		insert into products (product_id, product_title, product_country, product_taste, product_price, product_grade, product_sale_count,
+							  product_attachoname, product_attachsname, product_attachtype,
+							  product_detail_attachoname, product_detail_attachsname, product_detail_attachtype)
+		values(#{product_id}, #{product_title}, #{product_country}, #{product_taste}, #{product_price}, 0, 0,
+			   #{product_attachoname}, #{product_attachsname}, #{product_attachtype},
+			   #{product_detail_attachoname}, #{product_detail_attachsname}, #{product_detail_attachtype})
+	</insert>
+	
+	<select id="count" parameterType="HashMap" resultType="int">
+		select count(*) 
+			from (
+				select *
+				from products
+			   <if test="keyword == '상품명'">
+   			   where product_title like '%' || #{kcontent} || '%'
+   			   </if>
+   			   <if test="keyword == '나라'">
+				where product_country like '%' || #{kcontent} || '%'	
+   			   </if>
+				<if test="keyword == '향/맛'">
+				where product_taste like '%' || #{kcontent} || '%'	
+   			   </if>
+				<if test="sort ==''">order by product_id desc</if>
+				<if test="sort == 'asc'"> order by product_grade asc</if>
+				<if test="sort == 'desc'"> order by product_grade desc</if> 
+			) 
+	</select>
+	
+	<select id="list" parameterType="HashMap" resultType="product">
+	select rnum, product_id, product_title, product_country, product_taste, product_grade, product_price, product_sale_count,
+       product_attachoname, product_attachsname, product_attachtype,
+       product_detail_attachoname, product_detail_attachsname, product_detail_attachtype
+		from(
+		    select rownum as rnum, product_id, product_title, product_country, product_taste, product_grade, product_price, product_sale_count,
+		       product_attachoname, product_attachsname, product_attachtype,
+		       product_detail_attachoname, product_detail_attachsname, product_detail_attachtype
+		       from (
+		            select product_id, product_title, product_country, product_taste, product_grade, product_price, product_sale_count,
+					       product_attachoname, product_attachsname, product_attachtype,
+					       product_detail_attachoname, product_detail_attachsname, product_detail_attachtype
+		                   from products
+   			   			   <if test="keyword == '상품명'">
+			   			   where product_title like '%' || #{kcontent} || '%'
+			   			   </if>
+			   			   <if test="keyword == '나라'">
+							where product_country like '%' || #{kcontent} || '%'	
+			   			   </if>
+   			   			   <if test="keyword == '향/맛'">
+							where product_taste like '%' || #{kcontent} || '%'	
+			   			   </if>
+							<if test="sort ==''">order by product_id desc</if>
+							<if test="sort == 'asc'"> order by product_grade asc</if>
+							<if test="sort == 'desc'"> order by product_grade desc</if> 
+		       )
+		       where rownum &lt;= #{endRowNo}
+		)
+		where rnum &gt;= #{startRowNo}
+	</select>
+	
+	<select id="getProduct" parameterType="int" resultType="product">
+		select * from products where product_id = #{product_id}
+	</select>
+	
+	<delete id="delete">
+		delete from products
+		where product_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item}
+		</foreach>
+	</delete>
+	
+	<select id="selectByCountry"  parameterType="string" resultType="product" >
+		select product_title,product_taste,product_price,product_sale_count
+		from products
+		where product_country=#{product_country}
+		order by product_sale_count desc
+	</select>
+	
+	<select id="selectByTaste"  parameterType="string" resultType="product" >
+		select product_title,product_country,product_price,product_sale_count
+		from products
+		where product_taste=#{product_taste}
+		order by product_sale_count desc
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*)
+		from products
+	</select>
+</mapper>

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/f9927be6a9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="resources/css/reset.css">
+  <link rel="stylesheet" href="resources/css/home.css">
+  <link rel="stylesheet" href="resources/css/calendar.css">
   <link rel="stylesheet" href="resources/css/order.css">
   <link rel="stylesheet" href="resources/css/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,13 +18,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
   <base href="/"/>
   <script src="app.js"></script>
   <script src="appRoute.js"></script>
-
   <script src="controllers/usersController.js"></script>
   <script src="controllers/questionsController.js"></script>
   <script src="services/usersService.js"></script>
@@ -32,8 +33,12 @@
   <script src="services/orderService.js"></script>
   <script src="services/homeService.js"></script>
   <script src="controllers/homeController.js"></script>
-
+  <script src="controllers/calendarController.js"></script>
   
+  <script src="controllers/productsController.js"></script>
+  <script src="services/productsService.js"></script>
+  <script src="controllers/reviewsController.js"></script>
+  <script src="services/reviewsService.js"></script>
 </head>
 <body ng-controller="mainController">
   <div id="home">
@@ -47,10 +52,10 @@
         <div class="adminEnabled">
           관리자님 안녕하세요!
         </div>
+        <div class="adminLogout" ng-click="logout()" style="cursor:pointer">
+          로그아웃  <i class="fas fa-sign-out-alt"></i>  
+        </div>
         <ng-include src="'appMenu.html'"></ng-include>
-        <!-- <div class="copyright">
-          <span>Coptyright ⓒ 콩콩콩</span>
-        </div> -->
       </div>
       <div id="content">
         <ng-view/>

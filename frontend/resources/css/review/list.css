@@ -1,0 +1,66 @@
+/* table */
+
+.review-list-title {
+  font-size: 2rem;
+}
+
+.search-input {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  background-color: #f8f9fa;
+}
+
+.search-input:focus, .search-select:focus {
+  outline: 0;
+}
+
+.search-btn {
+  border: 0;
+  background-color: transparent;
+}
+
+.search-select {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  background-color: #f8f9fa;
+}
+
+.delete-btn {
+  color: #ffffff;
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+}
+
+#review-detail {
+  background-color: #f8f8f8;
+}
+
+.detail-img {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.page-btn {
+  border: 0;
+  background-color: transparent;
+}
+
+.table td {
+  border-top: 0;
+  text-align: center;
+}
+
+.table tbody, .table tbody+tbody {
+  border-top: 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+  text-align: center;
+}
+
+.text-success {
+  color: #F8D800 !important;
+}
+
+.page-btn {
+  
+}

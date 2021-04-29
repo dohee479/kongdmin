@@ -46,6 +46,9 @@ public interface OrdersDao {
 	public List<MonthlyData> selectMonthCount();
 	public List<OrderCount> selectCountryCount();
 	public List<OrderCount> selectTasteCount();
+	public int selectOrderCount();
+	public List<MonthlyData> selectDatePrice(String order_month);
+	public List<Order> selectByDate(String order_date);
 	public void changeState(@Param("order_id")int order_id, @Param("changeState")int changeState);
 	public int getProductCount(int order_id);
 	public void updateOrder(Order order);
