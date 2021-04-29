@@ -78,21 +78,21 @@
       </table>    
       <div ng-show="pager.totalRows != 0">
         <div colspan="6" style="text-align: center;">
-          <button class="page-btn"  style="border: none; outline: none;  background-color: #FFFFFF;"
+          <button class="page-btn"  style="border: none; outline: none;  background-color: #f8f9fa;"
                       ng-click="getReviewList(keyword, kcontent, 1, sort)"><<</button> 
-          <button class="page-btn" style="border: none; outline: none;  background-color: #FFFFFF;" 
+          <button class="page-btn" style="border: none; outline: none;  background-color: #f8f9fa;" 
                       ng-show="pager.groupNo>1" 
                       ng-click="getReviewList(keyword, kcontent, pager.startPageNo-1, sort)"><</button>
           <button ng-repeat="i in pageRange"
-                  style="width: 35px; height: 35px; border: solid white; padding: 5px; margin: 3px; border: none; outline: none;"
-                  ng-style="{ 'background-color' : (pager.pageNo==i) ? '#EEEEEE' : '#FFFFFF', 'border-radius' : (pager.pageNo==i) ? '50%' : '' }"
+                  style="width: 35px; height: 35px; border: solid #f8f9fa; padding: 5px; margin: 3px; border: none; outline: none;"
+                  ng-style="{ 'background-color' : (pager.pageNo==i) ? '#adb5bd' : '#f8f9fa', 'border-radius' : (pager.pageNo==i) ? '50%' : '' }"
                   ng-click="getReviewList(keyword, kcontent, i, sort)">{{i}}</button>
           <button class="page-btn" 
-                      style="border: none; outline: none;  background-color: #FFFFFF;"
+                      style="border: none; outline: none;  background-color: #f8f9fa;"
                       ng-show="pager.groupNo < pager.totalGroupNo" 
                       ng-click="getReviewList(keyword, kcontent, pager.endPageNo+1, sort)">></button>
           <button class="page-btn" 
-                      style="border: none; outline: none;  background-color: #FFFFFF;"
+                      style="border: none; outline: none;  background-color: #f8f9fa;"
                       ng-click="getReviewList(keyword, kcontent, pager.totalPageNo, sort)">>></button>
         </div>
       </div>

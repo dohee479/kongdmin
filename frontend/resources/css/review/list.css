@@ -7,6 +7,7 @@
 .search-input {
   border: 0;
   border-bottom: 2px solid #9b9b9b;
+  background-color: #f8f9fa;
 }
 
 .search-input:focus, .search-select:focus {
@@ -21,6 +22,7 @@
 .search-select {
   border: 0;
   border-bottom: 2px solid #9b9b9b;
+  background-color: #f8f9fa;
 }
 
 .delete-btn {
